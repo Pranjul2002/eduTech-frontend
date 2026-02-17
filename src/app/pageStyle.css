@@ -1,0 +1,54 @@
+#home{
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+#home .bannerContainer{
+    padding: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home .bannerContainer .bannerText{
+    padding: 20px;
+    text-align: center;
+    font-size: 50px;
+}
+
+#home .bannerContainer .bannerText .bannerSubText{
+    font-size: 25px;
+    margin-top: 25px;
+}
+
+.homeCarouselArea {
+  margin-top: 90px;
+}
+
+.carouselContainer {
+}
+
+.carouselTrack {
+  display: flex;
+  width: calc(600px * 14); /* 7 images × 2 */
+  animation: scroll 20s linear infinite;
+}
+
+.carouselItem {
+  margin: 40px;
+}
+
+.carouselItem img {
+  width: 200px;
+}
+
+/* Infinite scrolling animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

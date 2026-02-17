@@ -1,0 +1,114 @@
+#header{
+    background-color: #181A1B;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+}
+
+#header .container{
+    display: flex;
+    gap: 40px;
+    align-content: center;
+    justify-content: center;
+}
+
+#header .container .headerCol1{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+#header .container .headerCol1 .exploreTestButton{
+    border: none;
+    outline: none;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #362C93;
+    font-size: 16px;
+    position: relative;
+    background: none;
+}
+
+#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu{
+    display: none;
+    background-color: firebrick;
+    position: absolute;
+    padding: 12px 16px;
+    left: 0;
+    top: 100%;
+}
+
+#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList{
+    background-color: fuchsia;
+    display: flex;
+}
+
+#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList ul{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList ul li{
+    margin: 10px 0;
+    padding: 20px 20px 20px 0;
+    text-align: left;
+    background-color: #1C1E1F;
+    white-space: nowrap;
+}
+
+#header .container .headerCol1 .exploreTestButton:hover .exploreTestButtonDropdownMenu{
+  display: block;
+}
+
+#header .container .headerCol2{
+}
+
+#header .container .headerCol2 .menuItemContainer{
+    height: 100%;
+}
+
+#header .container .headerCol2 .menuItemContainer .menuItem{
+    height: 100%;
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+#header .container .headerCol2 .menuItemContainer .menuItem .item{
+    border-bottom: 2px solid #595394;
+    padding: 10px 18px;
+    transition: 200ms;
+}
+
+#header .container .headerCol2 .menuItemContainer .menuItem .i1:hover,
+#header .container .headerCol2 .menuItemContainer .menuItem .i2:hover,
+#header .container .headerCol2 .menuItemContainer .menuItem .i3:hover,
+#header .container .headerCol2 .menuItemContainer .menuItem .i4:hover,
+#header .container .headerCol2 .menuItemContainer .menuItem .i5:hover,
+#header .container .headerCol2 .menuItemContainer .menuItem .i6:hover {
+    border-bottom: 6px solid #0f009a;
+}
+
+
+
+#header .container .headerCol3{
+    display: flex;
+    align-items: center;
+}
+
+#header .container .headerCol3 .loginRegisterButton{
+    padding: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #362C93;
+    transition: 100ms;
+}
+
+#header .container .headerCol3 .loginRegisterButton:hover{
+    background-color: #595394;
+}
