@@ -77,7 +77,7 @@
 }
 
 #header .container .headerCol2 .menuItemContainer .menuItem .item{
-    border-bottom: 2px solid #595394;
+    border-bottom: 3px solid #1900ff;
     padding: 10px 18px;
     transition: 200ms;
 }
@@ -88,7 +88,7 @@
 #header .container .headerCol2 .menuItemContainer .menuItem .i4:hover,
 #header .container .headerCol2 .menuItemContainer .menuItem .i5:hover,
 #header .container .headerCol2 .menuItemContainer .menuItem .i6:hover {
-    border-bottom: 6px solid #0f009a;
+    border-bottom: 3px solid #0f009a;
 }
 
 

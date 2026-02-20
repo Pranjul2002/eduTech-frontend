@@ -1,131 +1,107 @@
 "use client";
+
 import React, { useState } from "react";
 import "./siginRegisterStyle.css";
 
-const SignInUp = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState(false); // New state
+const Page = () => {
 
-  const toggleForm = () => setIsLogin(!isLogin);
-  const togglePassword = () => setShowPassword(!showPassword);
+  const [isLoginToggle, setIsLoginToggle]=useState(true);
+
+  const [loginCredentials, setLoginCredentials]=useState({
+    email: "",
+    password: ""
+  })
+
+  const [signupCredentials, setSignupCredentials]=useState({
+    name: "",
+    email: "",
+    password: "",
+    age: "",
+    gender: ""
+  });
 
   return (
-    <div id="sigInOrRegister" className={isLogin ? "loginActive" : "registerActive"}>
-      {/* Hero Section */}
-      <div className="heroSection">
-        <div className="heroContent">
-          <h1>{isLogin ? "Welcome Back" : "Join Us Today"}</h1>
-          <p>
-            {isLogin
-              ? "Sign in to continue your journey with us."
-              : "Create an account to explore all features."}
-          </p>
-          <button className="toggleBtn" onClick={toggleForm}>
-            {isLogin ? "Register" : "Sign In"}
-          </button>
-        </div>
+    <div className="signInRegister">
+      <div className="signInRegisterHero">
+        <h1 style={{fontFamily: "Times New Roman"}}>WELCOME</h1>
+        <h6 style={{color: "rgba(255, 255, 255, 0.76)"}}>Start new Journey by joining in.</h6>
       </div>
 
-      {/* Form Section */}
-      <div className="loginOrRegisterForm">
-        <div className="loginOrRegisterFormContainer">
-          {/* Login Form */}
-          {isLogin && (
-            <form className="authForm">
-              <h2 className="formTitle">Login</h2>
+      <div className="signInRegisterContainer">
+        <div className="signInRegisterWrapper">
 
-              <div className="inputGroup">
-                <label htmlFor="loginEmail">Email</label>
-                <input
-                  type="email"
-                  id="loginEmail"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
+          <div className="switchButtons">
+            <button onClick={()=> setIsLoginToggle(true)}>Sign In</button>
+            <button onClick={()=> setIsLoginToggle(false)}>Sign Up</button>
+          </div>
 
-              <div className="inputGroup passwordGroup">
-                <label htmlFor="loginPassword">Password</label>
-                <input
-                  type={showPassword ? "text" : "password"} // toggle type
-                  id="loginPassword"
-                  placeholder="Enter your password"
-                  required
-                />
-                <span
-                  className="showPassword"
-                  onClick={togglePassword}
+          {isLoginToggle ? (
+            <form className="form login-form">
+              <h2>Sign In</h2>
+              <input
+                type="email"
+                placeholder="Email"
+                value={loginCredentials.email}
+                onChange={(e)=>setLoginCredentials({...loginCredentials, email: e.target.value})}
+                required />
+              <input
+                type="password"
+                placeholder="Password"
+                value={loginCredentials.password}
+                onChange={(e)=>setLoginCredentials({...loginCredentials, password: e.target.value})}
+                required />
+              <button type="submit">Login</button>
+            </form>
+
+          ) :(
+
+            <form className="form register-form">
+              <h2>Sign Up</h2>
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={signupCredentials.name}
+                onChange={(e)=>setSignupCredentials({...signupCredentials, name: e.target.value})}
+                required />
+              <input
+                type="email"
+                placeholder="Email"
+                value={signupCredentials.email}
+                onChange={(e)=>setSignupCredentials({...signupCredentials, email: e.target.value})}
+                required />
+              <input
+                type="password"
+                placeholder="Password"
+                value={signupCredentials.password}
+                onChange={(e)=>setSignupCredentials({...signupCredentials, password: e.target.value})}
+                required />
+              
+              <select
+                value={signupCredentials.gender}
+                onChange={(e)=>setSignupCredentials({...signupCredentials, gender: e.target.value})}>
+                <option value="option1">Male</option>
+                <option value="option2">Female</option>
+                <option value="option3">Other</option>
+              </select>
+
+              <input
+                placeholder="Age"
+                value={signupCredentials.age}
+                onChange={(e)=>setSignupCredentials({...signupCredentials, age: e.target.value})}/>
+              <button
+                type="submit"
+                onClick={console.log(signupCredentials)}
                 >
-                  {showPassword ? "Hide" : "Show"}
-                </span>
-              </div>
-
-              <div className="formOptions">
-                <div className="rememberMe">
-                  <input type="checkbox" id="remember" />
-                  <label htmlFor="remember">Remember me</label>
-                </div>
-                <a href="#" className="forgotPassword">
-                  Forgot password?
-                </a>
-              </div>
-
-              <button type="submit" className="primaryBtn">
-                Sign In
+                  Register
               </button>
             </form>
+
           )}
 
-          {/* Register Form */}
-          {!isLogin && (
-            <form className="authForm">
-              <h2 className="formTitle">Register</h2>
-
-              <div className="inputGroup">
-                <label htmlFor="regName">Full Name</label>
-                <input
-                  type="text"
-                  id="regName"
-                  placeholder="Enter your full name"
-                  required
-                />
-              </div>
-
-              <div className="inputGroup">
-                <label htmlFor="regEmail">Email</label>
-                <input
-                  type="email"
-                  id="regEmail"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-
-              <div className="inputGroup passwordGroup">
-                <label htmlFor="regPassword">Password</label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="regPassword"
-                  placeholder="Enter a password"
-                  required
-                />
-                <span
-                  className="showPassword"
-                  onClick={togglePassword}
-                >
-                  {showPassword ? "Hide" : "Show"}
-                </span>
-              </div>
-
-              <button type="submit" className="primaryBtn">
-                Register
-              </button>
-            </form>
-          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default SignInUp;
+export default Page;

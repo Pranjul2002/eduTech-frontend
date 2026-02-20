@@ -1,0 +1,93 @@
+.contactContainer {
+  padding: 100px 0;
+  min-height: 100vh;
+  display: flex;
+}
+
+.contactContainer .contactLeft {
+  flex: 0.6;
+  width: 100%;
+  max-width: 600px;
+  margin: 5% 15%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  box-shadow: 1px 1px 10px 5px rgb(48, 48, 48);
+  border-radius: 8px;
+}
+
+.contactContainer .contactLeft .contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.contactContainer .contactLeft .contactForm input,
+.contactContainer .contactLeft .contactForm textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  border-bottom: 3px solid gray;
+  font-size: 110%;
+  outline: none;
+  transition: 200ms;
+}
+
+.contactContainer .contactLeft .contactForm input:focus,
+.contactContainer .contactLeft .contactForm textarea:focus{
+    border-bottom: 3px solid rgb(255, 255, 255);
+}
+
+.contactContainer .contactLeft .contactForm input {
+  height: 40px;
+}
+
+.contactContainer .contactLeft .contactForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.sendBtn{
+    border: none;
+    outline: none;
+    background-color: #362C93;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 110%;
+    width: fit-content;
+    align-self: flex-end;
+    padding: 12px;
+    transition: 200ms;
+}
+
+.sendBtn:hover{
+    background-color: #595394;
+}
+
+.contactInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contactRight{
+  flex: 0.4;
+  align-content: center;
+  justify-content: center;
+}
+
+.contactRight .imageOverlay {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.contactRight .imageOverlay img{
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 20px 20px 5px rgb(0, 0, 0);
+}

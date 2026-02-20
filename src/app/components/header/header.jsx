@@ -9,8 +9,8 @@ const header = () => {
             <div className="headerCol1">
                 <div className="logo">EduTech</div>
                 <button className='exploreTestButton'>
-                    Explore Test ^
-                    <div class="exploreTestButtonDropdownMenu">
+                    Explore Test
+                    <div className="exploreTestButtonDropdownMenu">
                         <div className="testTypeList">
                             <ul>
                                 <li>Competitive Exams</li>
@@ -30,7 +30,7 @@ const header = () => {
                         <Link href="/" className='item i3'><li>Tests</li></Link>
                         <Link href="/" className='item i4'><li>Product</li></Link>
                         <Link href="/" className='item i5'><li>About</li></Link>
-                        <Link href="/" className='item i6'><li>Contact</li></Link>
+                        <Link href="/contact" className='item i6'><li>Contact</li></Link>
                     </ul>
                 </div>
             </div>

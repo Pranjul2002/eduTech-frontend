@@ -1,203 +1,124 @@
-/* siginRegisterStyle.css */
-:root {
-  --primary-color: #362C93;
-  --bg-dark: #121212;
-  --bg-light: #1f1f1f;
-  --text-light: #f5f5f5;
-  --text-muted: #aaa;
-  --border-radius: 12px;
-  --transition-speed: 0.5s;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-}
-
-body, html, #root {
-  height: 100%;
-}
-
-#sigInOrRegister {
+.signInRegister {
   display: flex;
-  height: 100vh;
-  background-color: var(--bg-dark);
-  color: var(--text-light);
-  overflow: hidden;
-  transition: all var(--transition-speed) ease-in-out;
-}
-
-/* Hero Section */
-.heroSection {
-  flex: 1;
-  background: linear-gradient(135deg, #362C93, #af81ff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  padding: 50px;
-  transition: all var(--transition-speed) ease-in-out;
-}
-
-.heroContent {
-  max-width: 400px;
-  text-align: center;
-}
-
-.heroContent h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.heroContent p {
-  margin-bottom: 30px;
-  font-size: 1rem;
-  color: rgba(255,255,255,0.85);
-}
-
-.toggleBtn {
-  padding: 10px 30px;
-  border: none;
-  background-color: white;
-  color: #4f46e5;
-  border-radius: var(--border-radius);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.toggleBtn:hover {
-  background-color: #e0e0ff;
-}
-
-/* Form Section */
-.loginOrRegisterForm {
-  flex: 1;
-  background-color: var(--bg-light);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all var(--transition-speed) ease-in-out;
-}
-
-.loginOrRegisterFormContainer {
+  min-height: 100vh;
   width: 100%;
-  max-width: 500px;
-  padding: 40px;
-  background-color: #1a1a1a;
-  border-radius: var(--border-radius);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  transition: all var(--transition-speed) ease-in-out;
 }
 
-/* Forms */
-.authForm {
+.signInRegisterHero {
+  flex: 1;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
   display: flex;
   flex-direction: column;
-}
-
-.formTitle {
-  font-size: 1.8rem;
-  margin-bottom: 45px;
-  text-align: center;
-}
-
-.inputGroup {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 35px;
-}
-
-.inputGroup label {
-  margin-bottom: 5px;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-.inputGroup input {
-  padding: 12px;
-  border-radius: var(--border-radius);
-  border: none;
-  background-color: #2a2a2a;
-  color: var(--text-light);
-  font-size: 1rem;
-  outline: none;
-  transition: 0.3s;
-}
-
-.inputGroup input:focus {
-  background-color: #3a3a3a;
-}
-
-/* Options & Buttons */
-.formOptions {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  font-size: 0.85rem;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
-.forgotPassword, .switchAuth a {
-  color: var(--primary-color);
-  text-decoration: none;
+
+.signInRegisterContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
-.primaryBtn {
-  padding: 12px;
-  border-radius: var(--border-radius);
+/* Card Wrapper */
+.signInRegisterWrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px 10px rgb(32, 32, 32);
+  transition: 0.3s ease;
+}
+
+/* Toggle Buttons */
+.switchButtons {
+  display: flex;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.switchButtons button {
+  flex: 1;
+  padding: 0.7rem;
   border: none;
-  background-color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.switchButtons button:hover {
+    background-color: #111827;
+}
+
+/* Form Styling */
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.form input {
+  border: none;
+  background: none;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #868686;
+  outline: none;
+  transition: 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.form input:focus {
+  border-bottom: 2px solid #ffffff;
+}
+
+
+.form select {
+  border: none;
+  background: none;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #868686;
+  outline: none;
+  transition: 0.3s ease;
+  font-size: 0.95rem;
+}
+
+/* Submit Button */
+.form button {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  background: #4f46e5;
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
-.primaryBtn:hover {
-  background-color: #6d5dfc;
+.form button:hover {
+  background: #4338ca;
 }
-
-/* Show Password Button */
-.passwordGroup {
-  position: relative;
-}
-
-.passwordGroup .showPassword {
-  position: absolute;
-  right: 12px;
-  top: 65%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 0.85rem;
-  color: white;
-  user-select: none;
-  transition: 0.3s;
-}
-
-.passwordGroup .showPassword:hover {
-  color: rgb(173, 173, 173);
-}
-
-
 
 /* Responsive */
-@media screen and (max-width: 900px) {
-  #sigInOrRegister {
+@media (max-width: 768px) {
+  .signInRegister {
     flex-direction: column;
   }
 
-  .heroSection {
-    flex: none;
-    width: 100%;
-    padding: 30px;
-  }
-
-  .loginOrRegisterForm {
-    flex: none;
-    width: 100%;
-    padding: 20px;
+  .signInRegisterHero {
+    height: 200px;
+    font-size: 1.5rem;
   }
 }
