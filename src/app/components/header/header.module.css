@@ -138,8 +138,13 @@
     }
 
     #header .menuToggleButton{
+        padding: 10px;
+        font-size: 250%;
+        border: none;
+        outline: none;
         display: flex;
         width: fit-content;
+        background-color: #362C93;;
     }
 
     #header .container{
