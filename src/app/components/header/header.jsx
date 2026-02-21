@@ -40,7 +40,7 @@ const header = () => {
                             <Link href="/" className={`${style.item} ${style.i1}`} onClick={closeMenu}><li>Home</li></Link>
                             <Link href="/" className={`${style.item} ${style.i2}`} onClick={closeMenu}><li>Upsilling</li></Link>
                             <Link href="/" className={`${style.item} ${style.i3}`} onClick={closeMenu}><li>Tests</li></Link>
-                            <Link href="/" className={`${style.item} ${style.i4}`} onClick={closeMenu}><li>Product</li></Link>
+                            <Link href="/products" className={`${style.item} ${style.i4}`} onClick={closeMenu}><li>Products</li></Link>
                             <Link href="/" className={`${style.item} ${style.i5}`} onClick={closeMenu}><li>About</li></Link>
                             <Link href="/contact" className={`${style.item} ${style.i6}`}><li>Contact</li></Link>
                         </ul>

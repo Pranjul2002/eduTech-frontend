@@ -1,0 +1,192 @@
+/* =========================
+   Container
+========================= */
+.container {
+  position: relative;
+  overflow: hidden;
+  padding: 170px 8% 120px 8%;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #f8fafc;
+}
+
+/* Symmetric Grid Background */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 70px 70px;
+  z-index: 0;
+}
+
+/* Left Glow */
+.container::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99,102,241,0.12), transparent 70%);
+  top: 50%;
+  left: -250px;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+/* Right Glow */
+.cardGrid::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99,102,241,0.12), transparent 70%);
+  top: 50%;
+  right: -250px;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+/* =========================
+   Hero
+========================= */
+.hero {
+  text-align: center;
+  margin-bottom: 120px;
+  z-index: 2;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 46px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.hero p {
+  font-size: 19px;
+  color: #1e293b;
+}
+
+/* =========================
+   Grid
+========================= */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 110px;
+  justify-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   Rectangle Card
+========================= */
+.card {
+  width: 100%;
+  max-width: 520px;
+  padding: 110px 70px;
+  text-align: center;
+  position: relative;
+  transition: all 0.4s ease;
+  border-radius: 20px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Glow Border Animation */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 24px;
+  z-index: -1;
+  opacity: 0.7;
+  animation: pulseGlow 2.5s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+/* Subject Glow Colors */
+.physics::before {
+  background: radial-gradient(circle, #b7d0f8, transparent 70%);
+}
+
+.chemistry::before {
+  background: radial-gradient(circle, #f8e6d9, transparent 70%);
+}
+
+.maths::before {
+  background: radial-gradient(circle, #e1f5e8, transparent 70%);
+}
+
+.social::before {
+  background: radial-gradient(circle, #f0e2fc, transparent 70%);
+}
+
+/* Hover 3D Effect */
+.card:hover {
+  transform: rotateX(6deg) rotateY(-6deg) scale(1.07);
+}
+
+/* =========================
+   Text
+========================= */
+.card h3 {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 22px;
+  color: #111827;
+}
+
+.card p {
+  font-size: 16px;
+  margin-bottom: 35px;
+  color: #1f2937;
+  line-height: 1.7;
+}
+
+/* =========================
+   Button
+========================= */
+.button {
+  display: inline-block;
+  padding: 16px 32px;
+  background: #111827;
+  color: white;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  transition: 0.3s ease;
+}
+
+.button:hover {
+  background: #000;
+  transform: translateY(-4px);
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 1000px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
+    gap: 90px;
+  }
+
+  .card {
+    padding: 90px 55px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+}
