@@ -52,3 +52,37 @@
     transform: translateX(-50%);
   }
 }
+
+
+
+@media screen and (min-width: 400px) and (max-width: 768px) {
+
+  #home .bannerContainer{
+    padding: 0px;
+  }
+
+  #home .bannerContainer .bannerText{
+    padding: 0px;
+    margin-top: 100px;
+    text-align: center;
+    font-size: 100%;
+  }
+
+  #home .bannerContainer .bannerText .bannerSubText{
+    margin-top: 60px;
+    font-size: 12px;
+  }
+
+  .homeCarouselArea {
+      margin-top: 50px;
+  }
+
+  .carouselTrack {
+    animation: scroll 30s linear infinite;
+  }
+
+  .carouselItem img {
+    width: 150px;
+  }
+
+}

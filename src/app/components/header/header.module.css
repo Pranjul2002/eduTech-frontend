@@ -6,12 +6,20 @@
     z-index: 10;
 }
 
+#header .menuToggleButton{
+    padding: 10px;
+    font-size: 130%;
+    display: none;
+}
+
 #header .container{
     display: flex;
     gap: 40px;
     align-content: center;
     justify-content: center;
 }
+
+
 
 #header .container .headerCol1{
     display: flex;
@@ -119,4 +127,46 @@
 
 #header .container .headerCol3 .loginRegisterButton:hover{
     background-color: #595394;
+}
+
+
+@media screen and (min-width: 80px) and (max-width: 768px) {
+    #header{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    #header .menuToggleButton{
+        display: flex;
+        width: fit-content;
+    }
+
+    #header .container{
+        display: none;
+    }
+
+    #header .menuOpen{
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
+
+    #header .menuOpen .headerCol1{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #header .menuOpen .headerCol2 .menuItemContainer .menuItem{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #header .menuOpen .headerCol3{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
 }
