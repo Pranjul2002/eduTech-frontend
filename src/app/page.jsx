@@ -22,8 +22,8 @@ const Home = () => {
               platform to Grow Skills
             </h1>
             <div className={style.bannerSubText}>
-              Build your network, share skills, and open up on the Learning <br/>
-              platformwhere you can be your whole self Forward Arrow
+              Build your skills, and open up on the Learning <br/>
+              platform where Education Blooms.
             </div>
           </div>
         </div>
