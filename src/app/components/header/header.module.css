@@ -3,6 +3,7 @@
     padding: 10px;
     position: fixed;
     width: 100%;
+    z-index: 10;
 }
 
 #header .container{
@@ -31,15 +32,15 @@
 
 #header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu{
     display: none;
-    background-color: firebrick;
+    background-color: #1C1E1F;
+    border-radius: 8px;
     position: absolute;
     padding: 12px 16px;
     left: 0;
-    top: 100%;
+    top: 115%;
 }
 
 #header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList{
-    background-color: fuchsia;
     display: flex;
 }
 
@@ -51,10 +52,17 @@
 
 #header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList ul li{
     margin: 10px 0;
-    padding: 20px 20px 20px 0;
+    padding: 20px 20px 20px 10px;
     text-align: left;
-    background-color: #1C1E1F;
+    background-color: #222627;
+    border-radius: 5px;
     white-space: nowrap;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList ul li:hover{
+    background-color: #2f3a3d;
 }
 
 #header .container .headerCol1 .exploreTestButton:hover .exploreTestButtonDropdownMenu{

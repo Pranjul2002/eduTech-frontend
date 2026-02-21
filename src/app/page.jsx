@@ -1,5 +1,5 @@
 import React from 'react'
-import './pageStyle.css'
+import style from './page.module.css'
 
 const images = [
   "/homePage/carousel1.png",
@@ -13,15 +13,15 @@ const images = [
 
 const Home = () => {
   return (
-    <div id='home'>
-      <div className='bannerArea'>
-        <div className='bannerContainer'>
-          <div className='bannerText'>
+    <div id={style.home}>
+      <div className={style.bannerArea}>
+        <div className={style.bannerContainer}>
+          <div className={style.bannerText}>
             <h1>
               An easier, more powerful <br/>
               platform to Grow Skills
             </h1>
-            <div className='bannerSubText'>
+            <div className={style.bannerSubText}>
               Build your network, share skills, and open up on the Learning <br/>
               platformwhere you can be your whole self Forward Arrow
             </div>
@@ -29,11 +29,11 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='homeCarouselArea'>
-        <div className='carouselContainer'>
-          <div className="carouselTrack">
+      <div className={style.homeCarouselArea}>
+        <div className={style.carouselContainer}>
+          <div className={style.carouselTrack}>
             {[...images, ...images, ...images].map((src, index) => (
-              <div className="carouselItem" key={index}>
+              <div className={style.carouselItem} key={index}>
                 <img src={src} alt={`slide-${index}`} />
               </div>
             ))}

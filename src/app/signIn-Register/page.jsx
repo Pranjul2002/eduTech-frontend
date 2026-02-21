@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import "./siginRegisterStyle.css";
+import style from "./siginRegister.module.css";
 
 const Page = () => {
 
@@ -21,22 +21,22 @@ const Page = () => {
   });
 
   return (
-    <div className="signInRegister">
-      <div className="signInRegisterHero">
+    <div className={style.signInRegister}>
+      <div className={style.signInRegisterHero}>
         <h1 style={{fontFamily: "Times New Roman"}}>WELCOME</h1>
         <h6 style={{color: "rgba(255, 255, 255, 0.76)"}}>Start new Journey by joining in.</h6>
       </div>
 
-      <div className="signInRegisterContainer">
-        <div className="signInRegisterWrapper">
+      <div className={style.signInRegisterContainer}>
+        <div className={style.signInRegisterWrapper}>
 
-          <div className="switchButtons">
+          <div className={style.switchButtons}>
             <button onClick={()=> setIsLoginToggle(true)}>Sign In</button>
             <button onClick={()=> setIsLoginToggle(false)}>Sign Up</button>
           </div>
 
           {isLoginToggle ? (
-            <form className="form login-form">
+            <form className={`${style.form} ${style.loginForm}`}>
               <h2>Sign In</h2>
               <input
                 type="email"
@@ -55,7 +55,7 @@ const Page = () => {
 
           ) :(
 
-            <form className="form register-form">
+            <form className={`${style.form} ${style.registerForm}`}>
               <h2>Sign Up</h2>
               <input
                 type="text"
@@ -79,9 +79,10 @@ const Page = () => {
               <select
                 value={signupCredentials.gender}
                 onChange={(e)=>setSignupCredentials({...signupCredentials, gender: e.target.value})}>
-                <option value="option1">Male</option>
-                <option value="option2">Female</option>
-                <option value="option3">Other</option>
+                  <option value="" disabled>Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
               </select>
 
               <input
@@ -89,9 +90,7 @@ const Page = () => {
                 value={signupCredentials.age}
                 onChange={(e)=>setSignupCredentials({...signupCredentials, age: e.target.value})}/>
               <button
-                type="submit"
-                onClick={console.log(signupCredentials)}
-                >
+                type="submit">
                   Register
               </button>
             </form>

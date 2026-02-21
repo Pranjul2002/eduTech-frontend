@@ -1,0 +1,43 @@
+#footer{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+}
+
+#footer .footerArea{
+    margin-top: 100px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer .footerArea .footerAreaWraper{
+}
+
+#footer .footerArea .footerAreaWraper .container{
+    padding: 25px;
+    border-bottom: 1px solid black;
+}
+
+.copywriteContent{
+    display: flex;
+    gap: 50px;
+    margin: 20px 0;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: -0.2px;
+}
+
+.copywriteMenu{
+}
+
+.copywriteMenu ul{
+    display: flex;
+    gap: 25px;
+}
+
+.copywriteMenu ul li{
+    list-style: none;
+}
