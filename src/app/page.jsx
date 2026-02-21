@@ -1,5 +1,7 @@
 import React from 'react'
+import { Gideon_Roman } from "next/font/google";
 import style from './page.module.css'
+
 
 const images = [
   "/homePage/carousel1.png",
@@ -16,7 +18,7 @@ const Home = () => {
     <div id={style.home}>
       <div className={style.bannerArea}>
         <div className={style.bannerContainer}>
-          <div className={style.bannerText}>
+          <div className={style.bannerText} style={{fontFamily:"Gideon_Roman", fontWeight:"300"}}>
             <h1>
               An easier, more powerful <br/>
               platform to Grow Skills
@@ -40,6 +42,20 @@ const Home = () => {
         </div>
         </div>
       </div>
+
+
+      <section className={style.growthMindSetArea}>
+        <div className={style.container}>
+          <p className={style.growthText} style={{fontFamily:"Gideon_Roman", fontWeight:"300"}}>
+            Starting is essential for progress.
+            <br />
+            ________________________________
+            <br />
+            "An investment in knowledge always pays the best interest."
+            <br />– Benjamin Franklin
+          </p>
+        </div>
+      </section>
     </div>
   )
 }
