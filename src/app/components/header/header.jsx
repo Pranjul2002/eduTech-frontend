@@ -25,10 +25,11 @@ const header = () => {
                         <div className={style.exploreTestButtonDropdownMenu}>
                             <div className={style.testTypeList}>
                                 <ul>
-                                    <li>Competitive Exams</li>
-                                    <li>School Preparation</li>
-                                    <li>School Boards</li>
-                                    <li>Other</li>
+                                    <Link href="/products/competetive/jee" onClick={closeMenu}><li>JEE Prepration</li></Link>
+                                    <Link href="/products/competetive/neet" onClick={closeMenu}><li>Neet Preparation</li></Link>
+                                    <Link href="/products/class_10" onClick={closeMenu}><li>School 10th Boards</li></Link>
+                                    <Link href="/products/class_12" onClick={closeMenu}><li>School 12th Boards</li></Link>
+                                    <Link href="/products" onClick={closeMenu}><li>All</li></Link>
                                 </ul>
                             </div>
                         </div>
