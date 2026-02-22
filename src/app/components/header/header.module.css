@@ -1,9 +1,11 @@
 .header {
-    background-color: #181A1B;
+    background-color: white;
+    color: black;
     padding: 10px;
     position: fixed;
     width: 100%;
     z-index: 1000;
+    border: 1px solid rgb(156, 156, 156);
 }
 
 .menuToggleButton {
@@ -12,7 +14,7 @@
     display: none;
     background: #362C93;
     border: none;
-    color: white;
+    color: black;
     cursor: pointer;
 }
 
@@ -28,7 +30,7 @@
     display: flex;
     align-items: center;
     gap: 25px;
-    color: white;
+    color: black;
 }
 
 .logo {
@@ -40,7 +42,7 @@
     border: 1px solid #362C93;
     padding: 15px;
     border-radius: 8px;
-    color: white;
+    color: black;
     font-size: 16px;
     position: relative;
     background: none;
@@ -49,13 +51,14 @@
 
 .exploreTestButtonDropdownMenu {
     display: none;
-    background-color: #1C1E1F;
+    background-color: rgb(235, 235, 235);
+    border: 1px solid gray;
     border-radius: 8px;
     position: absolute;
     padding: 12px 16px;
     left: 0;
     top: 100%;
-    z-index: 2000;
+    z-index: -1;
 }
 
 .exploreTestButton:hover .exploreTestButtonDropdownMenu {
@@ -73,17 +76,16 @@
 .testTypeList li {
     margin: 10px 0;
     padding: 15px 20px 15px 10px;
-    background-color: #222627;
-    color: white;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid gray;
     border-radius: 5px;
     white-space: nowrap;
-    transition: 200ms;
     cursor: pointer;
-    color: white;
+    transition: 200ms;
 }
 
 .testTypeList li:hover {
-    background-color: #2f3a3d;
+    background-color: rgb(233, 233, 233);
 }
 
 /* Column 2 */
@@ -102,7 +104,7 @@
 
 .item {
     border-bottom: 3px solid #1900ff;
-    color: rgb(226, 226, 226);
+    color: rgb(40, 40, 40);
     padding: 10px 18px;
     transition: 200ms;
     text-decoration: none;
@@ -110,7 +112,7 @@
 
 .item:hover {
     border-bottom: 3px solid #0f009a;
-    color: white;
+    color: black;
 }
 
 /* Column 3 */
