@@ -1,46 +1,53 @@
-#header{
+.header {
     background-color: #181A1B;
     padding: 10px;
     position: fixed;
     width: 100%;
-    z-index: 10;
+    z-index: 1000;
 }
 
-#header .menuToggleButton{
+.menuToggleButton {
     padding: 10px;
     font-size: 130%;
     display: none;
+    background: #362C93;
+    border: none;
+    color: white;
+    cursor: pointer;
 }
 
-#header .container{
+.container {
     display: flex;
     gap: 40px;
-    align-content: center;
+    align-items: center;
     justify-content: center;
 }
 
-
-
-#header .container .headerCol1{
+/* Column 1 */
+.headerCol1 {
     display: flex;
     align-items: center;
     gap: 25px;
     color: white;
 }
 
-#header .container .headerCol1 .exploreTestButton{
-    border: none;
-    outline: none;
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.exploreTestButton {
+    border: 1px solid #362C93;
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid #362C93;
     color: white;
     font-size: 16px;
     position: relative;
     background: none;
+    cursor: pointer;
 }
 
-#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu{
+.exploreTestButtonDropdownMenu {
     display: none;
     background-color: #1C1E1F;
     border-radius: 8px;
@@ -48,79 +55,71 @@
     padding: 12px 16px;
     left: 0;
     top: 100%;
-    z-index: -1;
+    z-index: 2000;
 }
 
-#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList{
-    display: flex;
+.exploreTestButton:hover .exploreTestButtonDropdownMenu {
+    display: block;
 }
 
-#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList ul{
+.testTypeList ul {
     display: flex;
     flex-direction: column;
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList ul li{
+.testTypeList li {
     margin: 10px 0;
-    padding: 20px 20px 20px 10px;
-    text-align: left;
+    padding: 15px 20px 15px 10px;
     background-color: #222627;
     color: white;
     border-radius: 5px;
     white-space: nowrap;
     transition: 200ms;
     cursor: pointer;
+    color: white;
 }
 
-#header .container .headerCol1 .exploreTestButton .exploreTestButtonDropdownMenu .testTypeList ul li:hover{
+.testTypeList li:hover {
     background-color: #2f3a3d;
 }
 
-#header .container .headerCol1 .exploreTestButton:hover .exploreTestButtonDropdownMenu{
-  display: block;
-}
+/* Column 2 */
+.headerCol2 {}
 
-#header .container .headerCol2{
-}
+.menuItemContainer {}
 
-#header .container .headerCol2 .menuItemContainer{
-    height: 100%;
-}
-
-#header .container .headerCol2 .menuItemContainer .menuItem{
-    height: 100%;
+.menuItem {
     list-style: none;
     display: flex;
     gap: 25px;
     align-items: center;
+    padding: 0;
+    margin: 0;
 }
 
-#header .container .headerCol2 .menuItemContainer .menuItem .item{
+.item {
     border-bottom: 3px solid #1900ff;
     color: rgb(226, 226, 226);
     padding: 10px 18px;
     transition: 200ms;
+    text-decoration: none;
 }
 
-#header .container .headerCol2 .menuItemContainer .menuItem .i1:hover,
-#header .container .headerCol2 .menuItemContainer .menuItem .i2:hover,
-#header .container .headerCol2 .menuItemContainer .menuItem .i3:hover,
-#header .container .headerCol2 .menuItemContainer .menuItem .i4:hover,
-#header .container .headerCol2 .menuItemContainer .menuItem .i5:hover,
-#header .container .headerCol2 .menuItemContainer .menuItem .i6:hover {
+.item:hover {
     border-bottom: 3px solid #0f009a;
     color: white;
 }
 
-
-
-#header .container .headerCol3{
+/* Column 3 */
+.headerCol3 {
     display: flex;
     align-items: center;
 }
 
-#header .container .headerCol3 .loginRegisterButton{
+.loginRegisterButton {
     padding: 18px;
     border-radius: 8px;
     cursor: pointer;
@@ -129,56 +128,47 @@
     font-family: 'Courier New', Courier, monospace;
     background-color: #362C93;
     color: white;
-    transition: 100ms;
+    transition: 150ms;
+    text-decoration: none;
 }
 
-#header .container .headerCol3 .loginRegisterButton:hover{
+.loginRegisterButton:hover {
     background-color: #595394;
 }
 
+/* ================= MOBILE ================= */
 
-@media screen and (min-width: 80px) and (max-width: 768px) {
-    #header{
-        display: flex;
-        flex-direction: column;
+@media (max-width: 768px) {
+
+    .header {
         padding: 20px;
     }
 
-    #header .menuToggleButton{
-        padding: 10px;
-        font-size: 250%;
-        border: none;
-        outline: none;
-        display: flex;
-        width: fit-content;
-        background-color: #362C93;
+    .menuToggleButton {
+        display: block;
     }
 
-    #header .container{
+    .container {
         display: none;
-    }
-
-    #header .menuOpen{
+        flex-direction: column;
         height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-content: center;
         justify-content: center;
+        gap: 40px;
     }
 
-    #header .menuOpen .headerCol1{
+    .menuOpen {
         display: flex;
+    }
+
+    .headerCol1 {
         flex-direction: column;
     }
 
-    #header .menuOpen .headerCol2 .menuItemContainer .menuItem{
-        display: flex;
+    .menuItem {
         flex-direction: column;
     }
 
-    #header .menuOpen .headerCol3{
-        display: flex;
+    .headerCol3 {
         justify-content: center;
-        align-content: center;
     }
 }

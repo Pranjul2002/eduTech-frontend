@@ -1,3 +1,5 @@
+/* ================= ROOT LAYOUT ================= */
+
 .signInRegister {
   display: flex;
   min-height: 100vh;
@@ -5,6 +7,8 @@
   background-color: #181A1B;
   padding-top: 85px;
 }
+
+/* ================= HERO PANEL ================= */
 
 .signInRegisterHero {
   flex: 1;
@@ -14,14 +18,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  font-weight: 600;
-  border-radius: 15px;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 0 20px 20px 0;
 }
 
+.signInRegisterHero h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.signInRegisterHero h6 {
+  font-weight: 400;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* ================= FORM CONTAINER ================= */
 
 .signInRegisterContainer {
-  background-color: #181A1B;
   flex: 1;
   display: flex;
   align-items: center;
@@ -30,105 +45,170 @@
 }
 
 /* Card Wrapper */
+
 .signInRegisterWrapper {
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px 10px rgb(32, 32, 32);
+  border-radius: 16px;
+  background-color: #222627;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
   transition: 0.3s ease;
 }
 
-/* Toggle Buttons */
+/* ================= TOGGLE BUTTONS ================= */
+
 .switchButtons {
   display: flex;
-  margin-bottom: 1.5rem;
-  border-radius: 8px;
+  margin-bottom: 1.8rem;
+  border-radius: 10px;
   overflow: hidden;
+  background-color: #111;
 }
 
 .switchButtons button {
-  color: white;
-  background-color: black;
   flex: 1;
-  padding: 0.7rem;
+  padding: 0.8rem;
   border: none;
   cursor: pointer;
-  font-weight: 500;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 120%;
-  transition: 0.5s ease;
+  font-weight: 600;
+  font-size: 1rem;
+  background-color: transparent;
+  color: #bbb;
+  transition: 0.3s ease;
 }
 
 .switchButtons button:hover {
-    background-color: #212121;
+  background-color: #2a2a2a;
+  color: white;
 }
 
-/* Form Styling */
+/* Optional active styling (you can apply conditional class later) */
+.activeToggle {
+  background-color: #4f46e5 !important;
+  color: white !important;
+}
+
+/* ================= FORM ================= */
+
 .form {
   display: flex;
   flex-direction: column;
 }
 
 .form h2 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
   text-align: center;
   color: #ffffff;
+  font-weight: 600;
 }
 
-.form input {
-  border: none;
-  color: white;
-  background: none;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #868686;
-  outline: none;
-  transition: 0.3s ease;
-  font-size: 0.95rem;
-}
+/* Inputs */
 
-.form input:focus {
-  border-bottom: 2px solid #ffffff;
-}
-
-
+.form input,
 .form select {
   border: none;
-  background: none;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #868686;
+  color: white;
+  background: transparent;
+  padding: 0.8rem 0.5rem;
+  margin-bottom: 1.3rem;
+  border-bottom: 2px solid #555;
   outline: none;
   transition: 0.3s ease;
   font-size: 0.95rem;
-  color: white;
 }
 
-/* Submit Button */
+.form input::placeholder {
+  color: #888;
+}
+
+.form input:focus,
+.form select:focus {
+  border-bottom: 2px solid #4f46e5;
+}
+
+/* Fix select dropdown background */
+.form select {
+  background-color: #222627;
+}
+
+/* ================= ERROR MESSAGE ================= */
+
+.errorMessage {
+  color: #ff6b6b;
+  background-color: rgba(255, 0, 0, 0.08);
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ================= SUBMIT BUTTON ================= */
+
 .form button {
-  padding: 0.8rem;
-  border-radius: 8px;
+  padding: 0.9rem;
+  border-radius: 10px;
   border: none;
   background: #4f46e5;
   color: white;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s ease;
+  font-size: 1rem;
 }
 
-.form button:hover {
+.form button:hover:not(:disabled) {
   background: #4338ca;
 }
 
-/* Responsive */
+.form button:disabled {
+  background: #3a3a3a;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+  .signInRegisterHero h1 {
+    font-size: 2.5rem;
+  }
+}
+
 @media (max-width: 768px) {
+
   .signInRegister {
     flex-direction: column;
   }
 
   .signInRegisterHero {
-    height: 200px;
-    font-size: 1.5rem;
+    height: 220px;
+    border-radius: 0;
+  }
+
+  .signInRegisterHero h1 {
+    font-size: 2rem;
+  }
+
+  .signInRegisterWrapper {
+    margin-top: 2rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .signInRegisterHero {
+    height: 180px;
+    padding: 1rem;
+  }
+
+  .signInRegisterHero h1 {
+    font-size: 1.7rem;
+  }
+
+  .signInRegisterWrapper {
+    padding: 1.5rem;
   }
 }

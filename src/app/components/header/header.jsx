@@ -1,58 +1,97 @@
 "use client"
 
-import React, { useState } from 'react'
-import Link from 'next/link'
-import style from './header.module.css'
+import React, { useState } from "react"
+import Link from "next/link"
+import styles from "./header.module.css"
 
-const header = () => {
-    
+const Header = () => {
+
     const [menuOpen, setMenuOpen] = useState(false)
 
-    const toggleMenu = () => setMenuOpen(!menuOpen);
+    const toggleMenu = () => setMenuOpen(prev => !prev)
     const closeMenu = () => setMenuOpen(false)
 
     return (
-        <div id={style.header}>
-            <button className={style.menuToggleButton} onClick={toggleMenu}>
-                {menuOpen ? 'X' : '='}
+        <div className={styles.header}>
+
+            <button
+                className={styles.menuToggleButton}
+                onClick={toggleMenu}
+            >
+                {menuOpen ? "X" : "☰"}
             </button>
 
-            <div className={`${style.container} ${menuOpen ? style.menuOpen : ''}`}>
-                <div className={style.headerCol1}>
-                    <div className={style.logo}>EduTech</div>
-                    <button className={style.exploreTestButton}>
+            <div className={`${styles.container} ${menuOpen ? styles.menuOpen : ""}`}>
+
+                {/* Column 1 */}
+                <div className={styles.headerCol1}>
+                    <div className={styles.logo}>EduTech</div>
+
+                    <div className={styles.exploreTestButton}>
                         Explore Test
-                        <div className={style.exploreTestButtonDropdownMenu}>
-                            <div className={style.testTypeList}>
+
+                        <div className={styles.exploreTestButtonDropdownMenu}>
+                            <div className={styles.testTypeList}>
                                 <ul>
-                                    <Link href="/products/competetive/jee" onClick={closeMenu}><li>JEE Prepration</li></Link>
-                                    <Link href="/products/competetive/neet" onClick={closeMenu}><li>Neet Preparation</li></Link>
-                                    <Link href="/products/class_10" onClick={closeMenu}><li>School 10th Boards</li></Link>
-                                    <Link href="/products/class_12" onClick={closeMenu}><li>School 12th Boards</li></Link>
-                                    <Link href="/products" onClick={closeMenu}><li>All</li></Link>
+                                    <Link href="/products/competetive/jee" onClick={closeMenu}>
+                                        <li>
+                                            JEE Preparation
+                                        </li>
+                                    </Link>
+                                    <Link href="/products/competetive/neet" onClick={closeMenu}>
+                                        <li>
+                                            NEET Preparation
+                                        </li>
+                                    </Link>
+                                    <Link href="/products/class_10" onClick={closeMenu}>
+                                        <li>
+                                            School 10th Boards
+                                        </li>
+                                    </Link>
+                                    <Link href="/products/class_12" onClick={closeMenu}>
+                                        <li>
+                                            School 12th Boards
+                                        </li>
+                                    </Link>
+                                    <Link href="/products" onClick={closeMenu}>
+                                        <li>
+                                            All
+                                        </li>
+                                    </Link>
                                 </ul>
                             </div>
                         </div>
-                    </button>
+                    </div>
                 </div>
-                <div className={style.headerCol2}>
-                    <div className={style.menuItemContainer}>
-                        <ul className={style.menuItem}>
-                            <Link href="/" className={`${style.item} ${style.i1}`} onClick={closeMenu}><li>Home</li></Link>
-                            <Link href="/" className={`${style.item} ${style.i2}`} onClick={closeMenu}><li>Upskilling</li></Link>
-                            <Link href="/" className={`${style.item} ${style.i3}`} onClick={closeMenu}><li>Tests</li></Link>
-                            <Link href="/products" className={`${style.item} ${style.i4}`} onClick={closeMenu}><li>Products</li></Link>
-                            <Link href="/" className={`${style.item} ${style.i5}`} onClick={closeMenu}><li>About</li></Link>
-                            <Link href="/contact" className={`${style.item} ${style.i6}`} onClick={closeMenu}><li>Contact</li></Link>
+
+                {/* Column 2 */}
+                <div className={styles.headerCol2}>
+                    <div className={styles.menuItemContainer}>
+                        <ul className={styles.menuItem}>
+                            <Link href="/" className={styles.item} onClick={closeMenu}><li>Home</li></Link>
+                            <Link href="/" className={styles.item} onClick={closeMenu}><li>Upskilling</li></Link>
+                            <Link href="/" className={styles.item} onClick={closeMenu}><li>Tests</li></Link>
+                            <Link href="/products" className={styles.item} onClick={closeMenu}><li>Products</li></Link>
+                            <Link href="/" className={styles.item} onClick={closeMenu}><li>About</li></Link>
+                            <Link href="/contact" className={styles.item} onClick={closeMenu}><li>Contact</li></Link>
                         </ul>
                     </div>
                 </div>
-                <div className={style.headerCol3}>
-                    <Link href="/signIn-Register" className={style.loginRegisterButton} onClick={closeMenu}>Sign in/Register</Link>
+
+                {/* Column 3 */}
+                <div className={styles.headerCol3}>
+                    <Link
+                        href="/signIn-Register"
+                        className={styles.loginRegisterButton}
+                        onClick={closeMenu}
+                    >
+                        Sign in / Register
+                    </Link>
                 </div>
+
             </div>
         </div>
     )
 }
 
-export default header
+export default Header
