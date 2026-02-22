@@ -6,7 +6,7 @@
 
 .signInRegisterHero {
   flex: 1;
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background: linear-gradient(135deg, #817bff, #4d00d3);
   color: white;
   display: flex;
   flex-direction: column;
@@ -18,6 +18,7 @@
 
 
 .signInRegisterContainer {
+  background-color: #181A1B;
   flex: 1;
   display: flex;
   align-items: center;
@@ -44,16 +45,20 @@
 }
 
 .switchButtons button {
+  color: white;
+  background-color: black;
   flex: 1;
   padding: 0.7rem;
   border: none;
   cursor: pointer;
   font-weight: 500;
-  transition: 0.3s ease;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 120%;
+  transition: 0.5s ease;
 }
 
 .switchButtons button:hover {
-    background-color: #111827;
+    background-color: #212121;
 }
 
 /* Form Styling */
@@ -70,6 +75,7 @@
 
 .form input {
   border: none;
+  color: white;
   background: none;
   padding: 0.8rem;
   margin-bottom: 1rem;
@@ -93,6 +99,7 @@
   outline: none;
   transition: 0.3s ease;
   font-size: 0.95rem;
+  color: white;
 }
 
 /* Submit Button */
