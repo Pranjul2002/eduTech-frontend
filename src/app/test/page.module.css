@@ -115,7 +115,7 @@
   border-radius: 12px;
   margin-top: 10px;
   border: none;
-  background: #4a525e;
+  background: #040405;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -123,21 +123,21 @@
 }
 
 .buttonPrimary:hover {
-  background: #bbcaeb;
+  background: #193345;
 }
 
 .buttonSecondary {
   padding: 10px 18px;
   border-radius: 8px;
   border: none;
-  background: #4a4e53;
+  background: #0b0c0d;
   color: white;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .buttonSecondary:hover {
-  background: #979a9e;
+  background: #193345;
 }
 
 /* ===============================
@@ -187,7 +187,7 @@
 }
 
 .optionButton:hover {
-  background: #e2e8f0;
+  background: #98c2fa;
 }
 
 .selected {
@@ -209,21 +209,21 @@
   padding: 12px 20px;
   border-radius: 10px;
   border: none;
-  background: #374a62;
-  color: #cedef6;
+  background: #605f60;
+  color: white;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
 .buttonSecondary:hover {
-  background: #19314f;
+  background: #1d77e6;
 }
 
 .buttonPrimary {
   padding: 12px 24px;
   border-radius: 10px;
   border: none;
-  background: #2e4262;
+  background: #605f60;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -231,7 +231,7 @@
 }
 
 .buttonPrimary:hover {
-  background: #293e6b;
+  background: #1d77e6;
 }
 /* ===============================
    RESULT SCREEN
@@ -312,4 +312,128 @@
     flex-direction: column;
     gap: 10px;
   }
+}
+.testContainer {
+  animation: floatCard 6s ease-in-out infinite alternate;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.testContainer:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes floatCard {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+.configBox {
+  animation: scaleFade 0.8s ease forwards;
+}
+
+@keyframes scaleFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.buttonPrimary,
+.buttonSecondary {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+}
+
+.buttonPrimary:hover,
+.buttonSecondary:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.buttonPrimary:active,
+.buttonSecondary:active {
+  transform: scale(0.97);
+}
+.timer {
+  animation: pulseTimer 2s infinite;
+}
+
+@keyframes pulseTimer {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+.questionCard {
+  animation: slideUpCard 0.5s ease;
+  transition: transform 0.3s ease;
+}
+
+.questionCard:hover {
+  transform: translateY(-4px);
+}
+
+@keyframes slideUpCard {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.optionButton {
+  transition: all 0.25s ease;
+}
+
+.optionButton:hover {
+  transform: translateX(5px);
+}
+
+.selected {
+  animation: selectPop 0.3s ease;
+}
+
+@keyframes selectPop {
+  0% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+.navigation button {
+  transition: all 0.3s ease;
+}
+
+.navigation button:hover {
+  transform: translateY(-4px);
+}
+.resultCard {
+  animation: resultPop 0.6s ease;
+}
+
+@keyframes resultPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-2deg);
+  }
+  60% {
+    transform: scale(1.05) rotate(1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+.successIcon {
+  animation: bounce 1.2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }

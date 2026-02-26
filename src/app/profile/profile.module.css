@@ -15,20 +15,56 @@
 
 .sidebar {
   width: 240px;
-  background: #111827;
-  color: white;
   padding: 30px 20px;
   position: fixed;
   height: 100vh;
   left: 0;
   top: 0;
+  color: white;
+  overflow: hidden;
+
+  /* Animated Gradient */
+  background: linear-gradient(
+    -45deg,
+    #223150,
+    #1e346f,
+    #172749,
+    #1b194a
+  );
+  background-size: 300% 300%;
+  animation: gradientMove 12s ease infinite;
+
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.2);
 }
+
+/* Gradient animation */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===================== */
+/* Logo */
+/* ===================== */
 
 .logo {
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 40px;
+  letter-spacing: 1px;
+
+  animation: logoGlow 3s ease-in-out infinite alternate;
 }
+
+@keyframes logoGlow {
+  from { text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+  to { text-shadow: 0 0 15px rgba(255,255,255,0.6); }
+}
+
+/* ===================== */
+/* Navigation */
+/* ===================== */
 
 .nav {
   display: flex;
@@ -37,28 +73,43 @@
 }
 
 .navItem {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
   color: #cbd5e1;
   text-decoration: none;
   font-size: 15px;
-  padding: 8px 10px;
+  padding: 10px 14px;
   border-radius: 8px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
+/* Slide + glow hover */
 .navItem:hover {
-  background: #1f2937;
+  background: rgba(255, 255, 255, 0.1);
   color: white;
+  transform: translateX(6px);
+  backdrop-filter: blur(4px);
 }
 
+/* Active indicator bar */
 .active {
-  background: #5e8cee;
+  background: rgba(255, 255, 255, 0.15);
   color: white !important;
 }
 
+.active::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: #ffffff;
+  border-radius: 4px;
+}
 /* ===================== */
 /* Main */
 /* ===================== */
@@ -173,7 +224,7 @@
 }
 
 .continueBtn {
-  background: #111827;
+  background: #4f4f4f;
   color: white;
   border: none;
   padding: 8px 18px;
@@ -183,7 +234,8 @@
 }
 
 .continueBtn:hover {
-  background: #2563eb;
+  background: #aae8f6;
+  color: black;
 }
 
 /* ===================== */
@@ -267,5 +319,119 @@
   .testCard {
     flex-direction: column;
     gap: 10px;
+  }
+}
+/* ===================== */
+/* Page Fade Animation */
+/* ===================== */
+
+.main {
+  animation: fadeInPage 0.8s ease-in-out;
+}
+
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== */
+/* Sidebar Smooth Hover */
+/* ===================== */
+
+.navItem {
+  transition: all 0.3s ease;
+}
+
+.navItem:hover {
+  transform: translateX(6px);
+}
+
+/* ===================== */
+/* Avatar Floating + Hover */
+/* ===================== */
+
+@keyframes floatAvatar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+.avatar {
+  animation: floatAvatar 4s ease-in-out infinite;
+  transition: all 0.4s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.08) rotate(3deg);
+  box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
+}
+
+/* ===================== */
+/* Cards Lift Animation */
+/* ===================== */
+
+.statCard,
+.courseCard,
+.testCard {
+  transition: all 0.35s ease;
+}
+
+.statCard:hover,
+.courseCard:hover,
+.testCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+/* ===================== */
+/* Button Animations */
+/* ===================== */
+
+.continueBtn,
+.resumeBtn {
+  transition: all 0.3s ease;
+}
+
+.continueBtn:hover,
+.resumeBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+.continueBtn:active,
+.resumeBtn:active {
+  transform: scale(0.95);
+}
+
+/* ===================== */
+/* Progress Bar Smooth Fill */
+/* ===================== */
+
+.progressFill {
+  transition: width 0.8s ease-in-out;
+}
+
+/* ===================== */
+/* Mobile Nav Animation */
+/* ===================== */
+
+.mobileNav {
+  animation: fadeInMobile 0.5s ease-in-out;
+}
+
+@keyframes fadeInMobile {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
