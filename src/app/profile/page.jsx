@@ -2,13 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import styles from "./profile.module.css";
-import {
-  FiUser,
-  FiBook,
-  FiFileText,
-  FiBarChart2,
-  FiSettings
-} from "react-icons/fi";
+import {FiUser, FiBook, FiFileText, FiBarChart2, FiSettings} from "react-icons/fi";
 
 export default function Profile() {
 

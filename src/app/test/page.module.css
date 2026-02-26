@@ -313,15 +313,12 @@
     gap: 10px;
   }
 }
+
 .testContainer {
   animation: floatCard 6s ease-in-out infinite alternate;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.testContainer:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-}
 
 @keyframes floatCard {
   from {
@@ -370,14 +367,7 @@
   50% { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
-.questionCard {
-  animation: slideUpCard 0.5s ease;
-  transition: transform 0.3s ease;
-}
 
-.questionCard:hover {
-  transform: translateY(-4px);
-}
 
 @keyframes slideUpCard {
   from {

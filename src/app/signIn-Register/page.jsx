@@ -32,7 +32,9 @@ const Page = () => {
     setLoading(true);
     setError("");
 
-    try {
+    router.push("/profile");
+
+    /*try {
       const response = await fetch(
         "http://192.168.41.188:8080/api/user/auth/login",
         {
@@ -56,7 +58,7 @@ const Page = () => {
       setError(err.message || "Something went wrong.");
     } finally {
       setLoading(false);
-    }
+    }*/
   };
 
   /* ================= REGISTER ================= */
