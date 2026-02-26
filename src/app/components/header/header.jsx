@@ -70,7 +70,7 @@ const Header = () => {
                         <ul className={styles.menuItem}>
                             <Link href="/" className={styles.item} onClick={closeMenu}><li>Home</li></Link>
                             <Link href="/" className={styles.item} onClick={closeMenu}><li>Upskilling</li></Link>
-                            <Link href="/" className={styles.item} onClick={closeMenu}><li>Tests</li></Link>
+                            <Link href="/test" className={styles.item} onClick={closeMenu}><li>Tests</li></Link>
                             <Link href="/products" className={styles.item} onClick={closeMenu}><li>Products</li></Link>
                             <Link href="/" className={styles.item} onClick={closeMenu}><li>About</li></Link>
                             <Link href="/contact" className={styles.item} onClick={closeMenu}><li>Contact</li></Link>
