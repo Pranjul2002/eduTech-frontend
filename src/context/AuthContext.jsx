@@ -8,27 +8,24 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { getCurrentUser, logoutUser } from "@/services/authService";
+import { tokenStore } from "@/services/apiClient";
 
 const AuthContext = createContext(null);
 
-/**
- * AuthProvider — Production-hardened
- * ─────────────────────────────────────────────────────────────────────────────
- * Changes from dev version:
- *  1. checkAuth uses useCallback to prevent unnecessary re-renders
- *  2. Shows a "session expired" notice when redirected from apiClient
- *  3. logout() clears user state BEFORE the API call so the UI updates instantly
- *     even if the logout request is slow or fails
- *  4. Avoids double-fetch: checkAuth is idempotent and guarded against
- *     concurrent calls via a ref flag
- */
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  // Start as true — we only know auth state after the first profile fetch
   const [authLoading, setAuthLoading] = useState(true);
 
   const checkAuth = useCallback(async () => {
+    // If no token in memory, skip the network call — definitely logged out
+    if (!tokenStore.get()) {
+      setUser(null);
+      setAuthLoading(false);
+      return;
+    }
+
     setAuthLoading(true);
     try {
       const profile = await getCurrentUser();
@@ -38,36 +35,34 @@ export function AuthProvider({ children }) {
         role: profile.role || "",
       });
     } catch {
-      // 401 or network error — user is not authenticated
+      tokenStore.clear();
       setUser(null);
     } finally {
       setAuthLoading(false);
     }
   }, []);
 
+  // On mount — token won't survive a full page refresh (memory cleared),
+  // so we skip the network call and show logged-out state immediately.
   useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+    setAuthLoading(false);
+  }, []);
 
   /**
-   * Called after a successful login API response.
-   * Re-fetches the user profile from the server so the context
-   * always reflects server state (not client-assembled data).
+   * Called right after loginUser() succeeds (token is already in tokenStore).
+   * Fetches the profile so AuthContext has the user's name/email/role.
    */
   const login = useCallback(async () => {
     await checkAuth();
   }, [checkAuth]);
 
-  /**
-   * Optimistically clears state then calls the logout endpoint.
-   * UI responds immediately; backend cookie is cleared asynchronously.
-   */
   const logout = useCallback(async () => {
-    setUser(null); // Instant UI update
+    setUser(null);          // Instant UI update
+    tokenStore.clear();
     try {
       await logoutUser();
     } catch {
-      // Cookie was already cleared on the client; backend failure is non-critical
+      // Non-critical — token is already cleared client-side
     }
   }, []);
 
