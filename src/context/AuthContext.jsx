@@ -14,12 +14,15 @@ import { tokenStore } from "@/services/apiClient";
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  // Start as true — we only know auth state after the first profile fetch
-  const [authLoading, setAuthLoading] = useState(true);
+  const [user, setUser]           = useState(null);
+  const [authLoading, setAuthLoading] = useState(true); // true until first auth check completes
 
+  /**
+   * Checks if there is a valid token and fetches the user profile.
+   * Called on mount (catches refresh) and after login.
+   */
   const checkAuth = useCallback(async () => {
-    // If no token in memory, skip the network call — definitely logged out
+    // No token in memory/localStorage → definitely logged out, skip network call
     if (!tokenStore.get()) {
       setUser(null);
       setAuthLoading(false);
@@ -30,11 +33,12 @@ export function AuthProvider({ children }) {
     try {
       const profile = await getCurrentUser();
       setUser({
-        name: profile.name || "",
+        name:  profile.name  || "",
         email: profile.email || "",
-        role: profile.role || "",
+        role:  profile.role  || "",
       });
     } catch {
+      // Token is invalid or expired — clear it and treat as logged out
       tokenStore.clear();
       setUser(null);
     } finally {
@@ -42,39 +46,33 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  // On mount — token won't survive a full page refresh (memory cleared),
-  // so we skip the network call and show logged-out state immediately.
-  useEffect(() => {
-    setAuthLoading(false);
-  }, []);
-
   /**
-   * Called right after loginUser() succeeds (token is already in tokenStore).
-   * Fetches the profile so AuthContext has the user's name/email/role.
+   * Run on every mount (including page refresh).
+   * If a token exists in localStorage, tokenStore already has it (initialised
+   * at module load time), so checkAuth will validate it against the backend
+   * and restore the user session silently.
    */
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  /** Called right after a successful login — token already set in tokenStore. */
   const login = useCallback(async () => {
     await checkAuth();
   }, [checkAuth]);
 
   const logout = useCallback(async () => {
-    setUser(null);          // Instant UI update
-    tokenStore.clear();
+    setUser(null);       // Instant UI update
+    tokenStore.clear();  // Remove from memory + localStorage
     try {
       await logoutUser();
     } catch {
-      // Non-critical — token is already cleared client-side
+      // Non-critical — token already cleared client-side
     }
   }, []);
 
   const value = useMemo(
-    () => ({
-      user,
-      isAuthenticated: !!user,
-      authLoading,
-      login,
-      logout,
-      refreshAuth: checkAuth,
-    }),
+    () => ({ user, isAuthenticated: !!user, authLoading, login, logout, refreshAuth: checkAuth }),
     [user, authLoading, login, logout, checkAuth]
   );
 
@@ -83,8 +81,6 @@ export function AuthProvider({ children }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used inside <AuthProvider>");
-  }
+  if (!context) throw new Error("useAuth must be used inside <AuthProvider>");
   return context;
 }

@@ -139,7 +139,7 @@ export default function DashboardPage() {
     } catch (error) {
       if (error?.status === 401 || error?.status === 403) {
         setIsAuthorized(false);
-        router.replace("/signIn-Register");
+        router.replace("/auth");
         return;
       }
       setPageError(error.message || "Failed to load dashboard.");
