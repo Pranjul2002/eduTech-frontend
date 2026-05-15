@@ -3,6 +3,7 @@
 import { useMemo, useState, useCallback } from "react";
 import styles from "./MyTest.module.css";
 import { getTestQuestions, submitTest, getMyTests } from "@/services/dashboardService";
+import TestEngine from "@/components/TestEngine/TestEngine";
 
 // ── Status config ─────────────────────────────────────────────────────────────
 const statusConfig = {
@@ -76,7 +77,7 @@ const TestRow = ({ test, onStart, onReview }) => {
       </div>
 
       <div className={styles.testDuration}>
-        <span>{test.duration || "—"}</span>
+        <span>{test.duration ? `${test.duration} min` : "—"}</span>
       </div>
 
       <div>
@@ -105,14 +106,12 @@ const TestRow = ({ test, onStart, onReview }) => {
 export default function MyTest({ tests: initialTests = [], isLoading = false }) {
   const [tests,        setTests]        = useState(initialTests);
   const [filter,       setFilter]       = useState("all");
-  const [view,         setView]         = useState("list");   // "list" | "taking" | "result" | "review"
+
+  // Engine state
+  const [engineOpen,   setEngineOpen]   = useState(false);
   const [selectedTest, setSelectedTest] = useState(null);
   const [questions,    setQuestions]    = useState([]);
-  const [answers,      setAnswers]      = useState({});       // questionId → selected option letter
-  const [currentQ,     setCurrentQ]     = useState(0);
-  const [result,       setResult]       = useState(null);
   const [loadingQ,     setLoadingQ]     = useState(false);
-  const [submitting,   setSubmitting]   = useState(false);
   const [error,        setError]        = useState("");
 
   // Keep in sync when parent refreshes
@@ -134,74 +133,36 @@ export default function MyTest({ tests: initialTests = [], isLoading = false }) 
     ? Math.round(completedTests.reduce((s, t) => s + (Number(t.score) || 0), 0) / completedTests.length)
     : 0;
 
-  // ── Start test ──────────────────────────────────────────────────────────
+  // ── Start test → open engine ────────────────────────────────────────────
   const handleStart = useCallback(async (test) => {
     setError("");
     setLoadingQ(true);
     setSelectedTest(test);
-    setAnswers({});
-    setCurrentQ(0);
-    setResult(null);
+    setQuestions([]);
     try {
       const qs = await getTestQuestions(test.id);
       setQuestions(qs);
-      setView("taking");
+      setEngineOpen(true);
     } catch (e) {
       setError(e.message || "Could not load questions. Please try again.");
-      setView("list");
     } finally {
       setLoadingQ(false);
     }
   }, []);
 
-  // ── Review past test ────────────────────────────────────────────────────
-  const handleReview = useCallback((test) => {
-    setSelectedTest(test);
-    setView("review");
-  }, []);
+  // ── Submit (delegated from engine) ──────────────────────────────────────
+  const handleEngineSubmit = useCallback(async (payload) => {
+    const res = await submitTest(selectedTest.id, payload);
+    // Refresh list in background
+    getMyTests("FREE").then(setTests).catch(() => {});
+    return res;
+  }, [selectedTest]);
 
-  // ── Answer selection ────────────────────────────────────────────────────
-  const handleAnswer = useCallback((questionId, letter) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: letter }));
-  }, []);
-
-  // ── Submit test ─────────────────────────────────────────────────────────
-  const handleSubmit = useCallback(async () => {
-    if (!selectedTest) return;
-    setSubmitting(true);
-    setError("");
-    try {
-      const payload = {
-        answers: Object.entries(answers).map(([questionId, selectedAnswer]) => ({
-          questionId: Number(questionId),
-          selectedAnswer,
-        })),
-      };
-      const res = await submitTest(selectedTest.id, payload);
-      setResult(res);
-      setView("result");
-
-      // Refresh test list so the status badge updates
-      try {
-        const refreshed = await getMyTests("FREE");
-        setTests(refreshed);
-      } catch (_) { /* non-critical */ }
-    } catch (e) {
-      setError(e.message || "Failed to submit test. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  }, [selectedTest, answers]);
-
-  // ── Back to list ────────────────────────────────────────────────────────
-  const handleBack = useCallback(() => {
-    setView("list");
+  // ── Engine closed (after analysis viewed) ───────────────────────────────
+  const handleEngineClose = useCallback(() => {
+    setEngineOpen(false);
     setSelectedTest(null);
     setQuestions([]);
-    setAnswers({});
-    setCurrentQ(0);
-    setResult(null);
-    setError("");
   }, []);
 
   // ════════════════════════════════════════════════════════════════════════
@@ -217,229 +178,23 @@ export default function MyTest({ tests: initialTests = [], isLoading = false }) 
       <div className={styles.root}>
         <div className={styles.centreBox}>
           <div className={styles.spinner} />
-          <p className={styles.loadingMsg}>Loading questions…</p>
+          <p className={styles.loadingMsg}>Preparing test environment…</p>
         </div>
       </div>
     );
   }
 
   // ════════════════════════════════════════════════════════════════════════
-  // RENDER: Test-taking view
+  // RENDER: Full-screen test engine (portal-like, covers entire viewport)
   // ════════════════════════════════════════════════════════════════════════
-  if (view === "taking" && selectedTest && questions.length > 0) {
-    const q       = questions[currentQ];
-    const total   = questions.length;
-    const answered = Object.keys(answers).length;
-    const progress = Math.round((answered / total) * 100);
-
-    const options = [
-      { letter: "A", text: q.optionA },
-      { letter: "B", text: q.optionB },
-      { letter: "C", text: q.optionC },
-      { letter: "D", text: q.optionD },
-    ];
-
+  if (engineOpen && selectedTest && questions.length > 0) {
     return (
-      <div className={styles.root}>
-        {/* Header */}
-        <div className={styles.takingHeader}>
-          <div>
-            <h3 className={styles.takingTitle}>{selectedTest.title}</h3>
-            <span className={styles.takingMeta}>
-              {selectedTest.subject} · Question {currentQ + 1} of {total}
-            </span>
-          </div>
-          <div className={styles.takingProgress}>
-            <span className={styles.progressLabel}>{answered}/{total} answered</span>
-            <div className={styles.progressBar}>
-              <div className={styles.progressFill} style={{ width: `${progress}%` }} />
-            </div>
-          </div>
-        </div>
-
-        {/* Question card */}
-        <div className={styles.questionCard}>
-          <div className={styles.qNumber}>Q{currentQ + 1}</div>
-          <p className={styles.qText}>{q.questionText}</p>
-
-          <div className={styles.optionsGrid}>
-            {options.map(({ letter, text }) => {
-              const selected = answers[q.id] === letter;
-              return (
-                <button
-                  key={letter}
-                  type="button"
-                  className={`${styles.optionBtn} ${selected ? styles.optionSelected : ""}`}
-                  onClick={() => handleAnswer(q.id, letter)}
-                >
-                  <span className={styles.optionLetter}>{letter}</span>
-                  <span className={styles.optionText}>{text}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className={styles.qMarks}>Marks: {q.marks}</div>
-        </div>
-
-        {/* Nav buttons */}
-        <div className={styles.takingNav}>
-          <button
-            type="button"
-            className={styles.navBtn}
-            onClick={() => setCurrentQ((p) => Math.max(0, p - 1))}
-            disabled={currentQ === 0}
-          >
-            ← Previous
-          </button>
-
-          {/* Question palette */}
-          <div className={styles.palette}>
-            {questions.map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                className={`${styles.paletteDot} ${idx === currentQ ? styles.paletteCurrent : ""} ${answers[questions[idx].id] ? styles.paletteAnswered : ""}`}
-                onClick={() => setCurrentQ(idx)}
-              >
-                {idx + 1}
-              </button>
-            ))}
-          </div>
-
-          {currentQ < total - 1 ? (
-            <button
-              type="button"
-              className={styles.navBtn}
-              onClick={() => setCurrentQ((p) => Math.min(total - 1, p + 1))}
-            >
-              Next →
-            </button>
-          ) : (
-            <button
-              type="button"
-              className={`${styles.navBtn} ${styles.submitBtn}`}
-              onClick={handleSubmit}
-              disabled={submitting}
-            >
-              {submitting ? "Submitting…" : "Submit Test"}
-            </button>
-          )}
-        </div>
-
-        {error && <p className={styles.errorMsg}>{error}</p>}
-      </div>
-    );
-  }
-
-  // ════════════════════════════════════════════════════════════════════════
-  // RENDER: Result view
-  // ════════════════════════════════════════════════════════════════════════
-  if (view === "result" && result) {
-    const pct = result.totalMarks > 0
-      ? Math.round((result.score / result.totalMarks) * 100) : 0;
-    const passed = pct >= 40;
-
-    return (
-      <div className={styles.root}>
-        <button type="button" className={styles.backBtn} onClick={handleBack}>
-          ← Back to Tests
-        </button>
-
-        <div className={styles.reviewCard}>
-          <div className={styles.reviewHeader} style={{ background: passed ? "#0f1117" : "#2d0a0a" }}>
-            <div>
-              <h3 className={styles.reviewTitle}>{selectedTest?.title}</h3>
-              <span className={styles.reviewMeta}>{selectedTest?.subject}</span>
-            </div>
-            <div className={styles.reviewScore}>
-              <span className={styles.reviewScoreNum} style={{ color: passed ? "#e8ff5a" : "#f87171" }}>
-                {result.score}
-              </span>
-              <span className={styles.reviewScoreMax}>/{result.totalMarks}</span>
-            </div>
-          </div>
-
-          <div className={styles.reviewBody}>
-            <div className={styles.resultBadge} style={{
-              background: passed ? "#3dba7415" : "#e8504a15",
-              color: passed ? "#3dba74" : "#e8504a",
-            }}>
-              {passed ? "🎉 You Passed!" : "❌ Better luck next time"}
-            </div>
-
-            <div className={styles.resultGrid}>
-              <div className={styles.resultStat}>
-                <span className={styles.resultStatVal}>{result.totalQuestions}</span>
-                <span className={styles.resultStatLbl}>Total Questions</span>
-              </div>
-              <div className={styles.resultStat}>
-                <span className={styles.resultStatVal}>{result.attemptedQuestions}</span>
-                <span className={styles.resultStatLbl}>Attempted</span>
-              </div>
-              <div className={styles.resultStat}>
-                <span className={styles.resultStatVal} style={{ color: "#3dba74" }}>
-                  {result.correctAnswers}
-                </span>
-                <span className={styles.resultStatLbl}>Correct</span>
-              </div>
-              <div className={styles.resultStat}>
-                <span className={styles.resultStatVal} style={{ color: "#e8504a" }}>
-                  {result.wrongAnswers}
-                </span>
-                <span className={styles.resultStatLbl}>Wrong</span>
-              </div>
-              <div className={styles.resultStat}>
-                <span className={styles.resultStatVal} style={{ color: "#9b7efc" }}>{pct}%</span>
-                <span className={styles.resultStatLbl}>Score %</span>
-              </div>
-            </div>
-
-            <button type="button" className={styles.retakeBtn} onClick={handleBack}>
-              Back to My Tests
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ════════════════════════════════════════════════════════════════════════
-  // RENDER: Review view (for already-completed tests)
-  // ════════════════════════════════════════════════════════════════════════
-  if (view === "review" && selectedTest) {
-    return (
-      <div className={styles.root}>
-        <button type="button" className={styles.backBtn} onClick={handleBack}>
-          ← Back to Tests
-        </button>
-
-        <div className={styles.reviewCard}>
-          <div className={styles.reviewHeader}>
-            <div>
-              <h3 className={styles.reviewTitle}>{selectedTest.title}</h3>
-              <span className={styles.reviewMeta}>
-                {selectedTest.subject}
-                {selectedTest.date ? ` · ${selectedTest.date}` : ""}
-              </span>
-            </div>
-            <div className={styles.reviewScore}>
-              <span className={styles.reviewScoreNum}>{selectedTest.score}</span>
-              <span className={styles.reviewScoreMax}>/{selectedTest.total}</span>
-            </div>
-          </div>
-
-          <div className={styles.reviewBody}>
-            <p className={styles.reviewNote}>
-              You scored <strong>{selectedTest.score}/{selectedTest.total}</strong> on this test.
-              Detailed answer-by-answer breakdown will be available in a future update.
-            </p>
-            <button type="button" className={styles.retakeBtn} onClick={() => handleStart(selectedTest)}>
-              Retake Test
-            </button>
-          </div>
-        </div>
-      </div>
+      <TestEngine
+        test={selectedTest}
+        questions={questions}
+        onSubmit={handleEngineSubmit}
+        onClose={handleEngineClose}
+      />
     );
   }
 
@@ -494,7 +249,7 @@ export default function MyTest({ tests: initialTests = [], isLoading = false }) 
                   key={test.id}
                   test={test}
                   onStart={handleStart}
-                  onReview={handleReview}
+                  onReview={handleStart}  // for past tests, re-enter engine in review mode if needed
                 />
               ))}
             </div>
