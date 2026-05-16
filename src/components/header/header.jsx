@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
@@ -9,8 +9,8 @@ import styles from "./header.module.css";
 import headerLogo from "../../assets/logo.png";
 import { useAuth } from "@/context/AuthContext";
 
-// Add this to your global CSS or layout:
-// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@500&display=swap');
+// Add to your global CSS or layout:
+// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -34,9 +34,49 @@ const Header = () => {
   const { user, isAuthenticated, authLoading, logout } = useAuth();
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [exploreOpen, setExploreOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
-  const closeMenu = () => setMenuOpen(false);
+  const exploreRef = useRef(null);
+  const profileRef = useRef(null);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (exploreRef.current && !exploreRef.current.contains(e.target)) {
+        setExploreOpen(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
+
+  // Close everything on route change
+  useEffect(() => {
+    setExploreOpen(false);
+    setProfileOpen(false);
+    setMenuOpen(false);
+  }, [pathname]);
+
+  const toggleMenu = () => {
+    setMenuOpen((prev) => {
+      const next = !prev;
+      document.body.style.overflow = next ? "hidden" : "";
+      return next;
+    });
+    setExploreOpen(false);
+    setProfileOpen(false);
+  };
+
+  const closeAll = () => {
+    setMenuOpen(false);
+    setExploreOpen(false);
+    setProfileOpen(false);
+    document.body.style.overflow = "";
+  };
 
   const userInitial = user?.name
     ? user.name.trim().charAt(0).toUpperCase()
@@ -46,20 +86,20 @@ const Header = () => {
 
   const handleLogout = async () => {
     await logout();
-    closeMenu();
+    closeAll();
     router.push("/auth");
     router.refresh();
   };
 
   const handleDashboardClick = () => {
-    closeMenu();
+    closeAll();
     router.push("/dashboard");
   };
 
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.brand} onClick={closeMenu}>
+        <Link href="/" className={styles.brand} onClick={closeAll}>
           <div className={styles.logoWrapper}>
             <Image
               src={headerLogo}
@@ -83,16 +123,23 @@ const Header = () => {
 
         <div className={`${styles.navArea} ${menuOpen ? styles.menuOpen : ""}`}>
           <div className={styles.leftActions}>
-            <div className={styles.exploreWrapper}>
-              <button type="button" className={styles.exploreButton}>
+
+            {/* ── Explore (click-toggled) ── */}
+            <div className={styles.exploreWrapper} ref={exploreRef}>
+              <button
+                type="button"
+                className={`${styles.exploreButton} ${exploreOpen ? styles.exploreButtonOpen : ""}`}
+                onClick={() => setExploreOpen((prev) => !prev)}
+                aria-expanded={exploreOpen}
+              >
                 Explore Tests
               </button>
 
-              <div className={styles.exploreDropdown}>
+              <div className={`${styles.exploreDropdown} ${exploreOpen ? styles.dropdownVisible : ""}`}>
                 <ul className={styles.exploreList}>
                   {EXPLORE_LINKS.map(({ href, label }) => (
                     <li key={href}>
-                      <Link href={href} onClick={closeMenu}>
+                      <Link href={href} onClick={closeAll}>
                         {label}
                       </Link>
                     </li>
@@ -100,6 +147,7 @@ const Header = () => {
                 </ul>
               </div>
             </div>
+
           </div>
 
           <nav className={styles.nav}>
@@ -111,7 +159,7 @@ const Header = () => {
                     className={`${styles.item} ${
                       pathname === href ? styles.activeItem : ""
                     }`}
-                    onClick={closeMenu}
+                    onClick={closeAll}
                   >
                     {label}
                   </Link>
@@ -122,12 +170,19 @@ const Header = () => {
 
           <div className={styles.rightActions}>
             {authLoading ? null : isAuthenticated ? (
-              <div className={styles.profileDropdownWrapper}>
-                <button type="button" className={styles.profileAvatar}>
+
+              /* ── Profile (click-toggled) ── */
+              <div className={styles.profileDropdownWrapper} ref={profileRef}>
+                <button
+                  type="button"
+                  className={`${styles.profileAvatar} ${profileOpen ? styles.profileAvatarOpen : ""}`}
+                  onClick={() => setProfileOpen((prev) => !prev)}
+                  aria-expanded={profileOpen}
+                >
                   <span>{userInitial}</span>
                 </button>
 
-                <div className={styles.profileDropdownMenu}>
+                <div className={`${styles.profileDropdownMenu} ${profileOpen ? styles.dropdownVisible : ""}`}>
                   <button
                     type="button"
                     className={styles.dropdownItem}
@@ -155,11 +210,12 @@ const Header = () => {
                   </button>
                 </div>
               </div>
+
             ) : (
               <Link
                 href="/auth"
                 className={styles.loginRegisterButton}
-                onClick={closeMenu}
+                onClick={closeAll}
               >
                 Sign in / Register
               </Link>
