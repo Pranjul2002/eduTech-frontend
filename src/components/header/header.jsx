@@ -9,6 +9,9 @@ import styles from "./header.module.css";
 import headerLogo from "../../assets/logo.png";
 import { useAuth } from "@/context/AuthContext";
 
+// Add this to your global CSS or layout:
+// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@500&display=swap');
+
 const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/upskilling", label: "ReviseAI ✨" },
@@ -62,7 +65,7 @@ const Header = () => {
               src={headerLogo}
               alt="EduTech Logo"
               fill
-              sizes="120px"
+              sizes="52px"
               className={styles.logoImage}
             />
           </div>
@@ -105,8 +108,9 @@ const Header = () => {
                 <li key={href}>
                   <Link
                     href={href}
-                    className={`${styles.item} ${pathname === href ? styles.activeItem : ""
-                      }`}
+                    className={`${styles.item} ${
+                      pathname === href ? styles.activeItem : ""
+                    }`}
                     onClick={closeMenu}
                   >
                     {label}
@@ -157,7 +161,7 @@ const Header = () => {
                 className={styles.loginRegisterButton}
                 onClick={closeMenu}
               >
-                Sign in/Register
+                Sign in / Register
               </Link>
             )}
           </div>
