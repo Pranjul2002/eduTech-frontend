@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { House, Sparkles, Package, Info, Phone } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import styles from "./header.module.css";
@@ -13,11 +14,11 @@ import { useAuth } from "@/context/AuthContext";
 // @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/upskilling", label: "ReviseAI ✨" },
-  { href: "/products", label: "Products" },
-  { href: "/about-us", label: "About" },
-  { href: "/contact-us", label: "Contact" },
+  { href: "/",          label: "Home",      icon: House     },
+  { href: "/upskilling", label: "ReviseAI ✨", icon: Sparkles },
+  { href: "/products",  label: "Products",  icon: Package   },
+  { href: "/about-us",  label: "About",     icon: Info      },
+  { href: "/contact-us", label: "Contact",  icon: Phone     },
 ];
 
 const EXPLORE_LINKS = [
@@ -152,7 +153,7 @@ const Header = () => {
 
           <nav className={styles.nav}>
             <ul className={styles.menuItem}>
-              {NAV_LINKS.map(({ href, label }) => (
+              {NAV_LINKS.map(({ href, label, icon: Icon }) => (
                 <li key={href}>
                   <Link
                     href={href}
@@ -161,6 +162,7 @@ const Header = () => {
                     }`}
                     onClick={closeAll}
                   >
+                    <Icon size={16} strokeWidth={1.8} color="black" className={styles.lucideIcon}/>
                     {label}
                   </Link>
                 </li>
