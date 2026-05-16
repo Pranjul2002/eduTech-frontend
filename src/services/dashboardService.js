@@ -81,6 +81,16 @@ export const submitTest = async (testId, payload) => {
 };
 
 /**
+ * Fetches review data for a completed attempt:
+ * questions WITH correct answers exposed, plus the attempt stats.
+ * @param {number} testId
+ * Returns: { attempt: TestAttemptResponse, questions: ReviewQuestionResponse[] }
+ */
+export const getTestReview = async (testId) => {
+  return apiClient(API_ENDPOINTS.TESTS.REVIEW(testId));
+};
+
+/**
  * Fetches the logged-in user's past test attempts.
  * Returns: TestAttemptResponse[]
  */

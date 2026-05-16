@@ -27,5 +27,6 @@ export const API_ENDPOINTS = {
     QUESTIONS:   (testId) => `/api/tests/${testId}/questions`,
     SUBMIT:      (testId) => `/api/tests/${testId}/submit`,
     MY_ATTEMPTS: "/api/tests/my-attempts",
+    REVIEW:      (testId) => `/api/tests/${testId}/review`,
   },
 };

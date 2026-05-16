@@ -399,3 +399,189 @@
   .resultGrid  { grid-template-columns: repeat(2, 1fr); }
   .palette     { max-width: 280px; }
 }
+/* ═══════════════════════════════════════════════════════════════
+   Review Analysis Screen
+═══════════════════════════════════════════════════════════════ */
+
+.reviewRoot {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  min-height: 100%;
+  font-family: inherit;
+}
+
+/* Header */
+.reviewHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  flex-wrap: wrap;
+}
+.reviewHeaderLeft { flex: 1; min-width: 200px; }
+.reviewVerdict {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.verdictPass { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+.verdictFail { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+.reviewTitle { font-size: 18px; font-weight: 700; color: #111827; margin: 0 0 4px; }
+.reviewSub   { font-size: 12.5px; color: #9ca3af; margin: 0; }
+
+.reviewScoreBox {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.reviewScoreNum   { font-size: 42px; font-weight: 800; color: #111827; line-height: 1; }
+.reviewScoreSep   { font-size: 24px; color: #9ca3af; }
+.reviewScoreTotal { font-size: 22px; color: #6b7280; }
+.reviewScorePct   { font-size: 18px; font-weight: 700; margin-left: 8px; }
+
+.reviewCloseBtn {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.reviewCloseBtn:hover { background: #e5e7eb; }
+
+/* Stats row */
+.reviewStats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.reviewStatCard {
+  flex: 1;
+  min-width: 100px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.reviewStatVal { font-size: 22px; font-weight: 800; color: #111827; }
+.reviewStatLbl { font-size: 11px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+
+/* Tabs */
+.reviewTabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0;
+}
+.reviewTab {
+  padding: 10px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #6b7280;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+.reviewTab:hover { color: #111827; }
+.activeReviewTab { color: #2563eb; border-bottom-color: #2563eb; }
+
+/* Overview bars */
+.reviewOverview {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.reviewBarRow { display: flex; align-items: center; gap: 14px; }
+.reviewBarLabel { width: 130px; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+.reviewBarTrack {
+  flex: 1;
+  height: 10px;
+  background: #f3f4f6;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.reviewBarFill { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+
+/* Questions list */
+.reviewQuestions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.reviewQCard {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px;
+}
+.reviewQNum {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.reviewQText {
+  font-size: 14.5px;
+  color: #111827;
+  font-weight: 500;
+  margin: 0 0 14px;
+  line-height: 1.6;
+}
+.reviewOptions { display: flex; flex-direction: column; gap: 8px; }
+.reviewOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-size: 13.5px;
+}
+.reviewOptLetter {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.reviewCorrectTag {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 3px 8px;
+  border-radius: 99px;
+}
