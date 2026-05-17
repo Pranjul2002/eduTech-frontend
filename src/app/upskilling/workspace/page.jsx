@@ -8,6 +8,7 @@ import WorkspaceHeader from "./components/WorkspaceHeader";
 import SourcesPanel from "./components/SourcesPanel";
 import StudioPanel from "./components/StudioPanel";
 import MainPanel from "./components/MainPanel";
+import SourceDetailPanel from "./components/SourceDetailPanel";
 import styles from "./workspace.module.css";
 import { useFiles } from "../context/FileContext";
 import { useAuth } from "@/context/AuthContext";
@@ -30,7 +31,6 @@ export default function UpskillingWorkspacePage() {
     if (sources.length === 0) router.replace("/upskilling");
   }, [router, sources.length]);
 
-  // Auth-guarded upload: if somehow called without auth, redirect instead of opening picker
   const openFilePicker = () => {
     if (!isAuthenticated) {
       router.push("/auth?redirect=/upskilling/workspace");
@@ -49,16 +49,10 @@ export default function UpskillingWorkspacePage() {
   const layoutClassName = [styles.layout, !activePanel ? styles.panelClosed : ""]
     .filter(Boolean).join(" ");
 
-  // Show nothing while auth is resolving to avoid flash
   if (authLoading || !isAuthenticated || sources.length === 0) return null;
 
   return (
-    <main className={styles.page}>
-      <div className={styles.orbOne} />
-      <div className={styles.orbTwo} />
-      <div className={styles.orbThree} />
-      <div className={styles.gridOverlay} />
-
+    <main className={styles.page} data-page="upskilling-workspace">
       <WorkspaceHeader />
 
       <motion.section
@@ -67,7 +61,7 @@ export default function UpskillingWorkspacePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
-        {/* ── Left panel: Sources / Studio (unchanged) ── */}
+        {/* ── Left panel: Sources / Studio ── */}
         {activePanel ? (
           <motion.aside
             className={styles.mergedPanel}
@@ -113,7 +107,7 @@ export default function UpskillingWorkspacePage() {
           </button>
         )}
 
-        {/* ── Right column: AI Chat <-> Assessment tabs ── */}
+        {/* ── Middle column: AI Chat / Assessment ── */}
         <motion.div
           style={{ minHeight: 0, height: "100%", display: "flex", flexDirection: "column" }}
           initial={{ opacity: 0, x: 6 }}
@@ -122,6 +116,16 @@ export default function UpskillingWorkspacePage() {
         >
           <MainPanel onUploadClick={openFilePicker} />
         </motion.div>
+
+        {/* ── Right column: About this source ── */}
+        <motion.aside
+          style={{ height: "100%", minHeight: 0 }}
+          initial={{ opacity: 0, x: 6 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+        >
+          <SourceDetailPanel />
+        </motion.aside>
       </motion.section>
 
       <input ref={fileInputRef} type="file" hidden multiple onChange={handleFileChange} />

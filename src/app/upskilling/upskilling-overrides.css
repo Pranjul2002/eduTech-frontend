@@ -1,0 +1,11 @@
+/* Hides the global site header and footer ONLY on the workspace page
+   (uses data-page="upskilling-workspace" set on the <main> element in page.jsx) */
+
+body:has([data-page="upskilling-workspace"]) {
+  padding-top: 0 !important;
+}
+
+body:has([data-page="upskilling-workspace"]) > div > header,
+body:has([data-page="upskilling-workspace"]) > div > footer {
+  display: none !important;
+}

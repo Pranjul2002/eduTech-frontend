@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { ChevronUp, ChevronDown } from "lucide-react";
 import { House, Sparkles, Package, Info, Phone } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
@@ -133,7 +134,7 @@ const Header = () => {
                 onClick={() => setExploreOpen((prev) => !prev)}
                 aria-expanded={exploreOpen}
               >
-                Explore Tests
+                Explore Tests {exploreOpen ? <ChevronUp /> : <ChevronDown />}
               </button>
 
               <div className={`${styles.exploreDropdown} ${exploreOpen ? styles.dropdownVisible : ""}`}>

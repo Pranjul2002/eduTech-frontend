@@ -1,10 +1,14 @@
-/* ── Outer wrapper fills the right grid column fully ── */
+/* ── Outer wrapper fills the middle grid column fully ── */
 .wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 0;
   gap: 8px;
+  border: 1px solid rgba(0, 140, 255, 0.336);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.301);
+  border-radius: 15px;
+  padding: 10px;
 }
 
 /* ── Tab strip ─────────────────────────────────────── */
@@ -12,12 +16,10 @@
   flex-shrink: 0;
   display: flex;
   gap: 4px;
-  padding: 5px;
+  padding: 4px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid #82b6ff;
+  background: #ffffff;
 }
 
 .tab {
@@ -31,7 +33,7 @@
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
-  color: rgba(255, 255, 255, 0.4);
+  color: #94a3b8;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
@@ -42,17 +44,19 @@
 }
 
 .tab:hover {
-  color: rgba(255, 255, 255, 0.75);
-  background: rgba(255, 255, 255, 0.06);
+  color: #0f172a;
+  background: #c1e8ff9d;
 }
 
 .tabActive {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.12);
+  background: #f4f6fb;
+  color: #00799e;
+  border-color: #e2e8f0;
+  font-weight: 600;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.205);
 }
 
-/* Glowing underline indicator */
+/* Underline indicator */
 .tabIndicator {
   position: absolute;
   bottom: 0;
@@ -60,8 +64,7 @@
   right: 15%;
   height: 2px;
   border-radius: 2px 2px 0 0;
-  background: linear-gradient(90deg, #6366f1, #a78bfa);
-  box-shadow: 0 0 8px rgba(167, 139, 250, 0.6);
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
 }
 
 /* ── Body ──────────────────────────────────────────── */

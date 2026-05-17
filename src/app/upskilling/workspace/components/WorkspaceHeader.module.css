@@ -2,12 +2,14 @@
   position: relative;
   z-index: 2;
   flex-shrink: 0;
-  height: 56px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 10px;
+  padding: 0 6px;
+  border-bottom: 1px solid #e9eef5;
+  background: #f4f6fb;
 }
 
 .left {
@@ -26,7 +28,7 @@
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: #fff;
   flex-shrink: 0;
-  box-shadow: 0 0 0 1px rgba(99,102,241,0.4), 0 4px 12px rgba(99,102,241,0.3);
+  box-shadow: 0 0 0 1px rgba(99,102,241,0.3), 0 4px 12px rgba(99,102,241,0.2);
 }
 
 .titleWrap {
@@ -40,7 +42,7 @@
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.9);
+  color: #0f172a;
   letter-spacing: -0.02em;
   white-space: nowrap;
   overflow: hidden;
@@ -49,8 +51,8 @@
 
 .editableHint {
   font-size: 0.72rem;
-  color: rgba(255,255,255,0.28);
-  border: 1px solid rgba(255,255,255,0.1);
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
   padding: 2px 8px;
   border-radius: 999px;
   white-space: nowrap;
@@ -68,7 +70,7 @@
 .ghostButton,
 .iconButton {
   height: 36px;
-  border-radius: 999px;
+  border-radius: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -77,51 +79,52 @@
   cursor: pointer;
   font-size: 0.82rem;
   font-weight: 500;
+  font-family: inherit;
   transition: all 0.16s ease;
   white-space: nowrap;
 }
 
+
 .ghostButton {
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.6);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
 }
 
 .ghostButton:hover {
-  background: rgba(255,255,255,0.09);
-  color: rgba(255,255,255,0.9);
-  border-color: rgba(255,255,255,0.18);
+  background: #f4f6fb;
+  color: #0f172a;
+  border-color: #cbd5e1;
 }
 
 .primaryButton {
-  border: 1px solid rgba(99,102,241,0.5);
-  background: rgba(99,102,241,0.2);
-  color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.3);
+  background: linear-gradient(135deg, #3880d3 20%, #66a4eb 40%, #4e85c4 60%, #2d7dd8 100%);
+  color: #000000;
 }
 
 .primaryButton:hover {
-  background: rgba(99,102,241,0.35);
-  color: #c7d2fe;
-  border-color: rgba(99,102,241,0.7);
+  border-color: rgba(99,102,241,0.5);
+  background: linear-gradient(135deg, #1e73d4 20%, #508fd6 40%, #6fa3df 60%, #2d7dd8 100%);
 }
 
 .iconButton {
   width: 36px;
   padding: 0;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.5);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #94a3b8;
 }
 
 .iconButton:hover {
-  background: rgba(255,255,255,0.09);
-  color: rgba(255,255,255,0.85);
+  background: #f4f6fb;
+  color: #0f172a;
 }
 
 .divider {
   width: 1px;
   height: 24px;
-  background: rgba(255,255,255,0.1);
+  background: #e9eef5;
   flex-shrink: 0;
 }
 
@@ -129,7 +132,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.15);
+  border: 1.5px solid #e2e8f0;
   background: linear-gradient(135deg, #f59e0b 0%, #6366f1 100%);
   cursor: pointer;
   flex-shrink: 0;
@@ -137,7 +140,7 @@
 }
 
 .avatar:hover {
-  border-color: rgba(255,255,255,0.35);
+  border-color: #6366f1;
 }
 
 @media (max-width: 768px) {

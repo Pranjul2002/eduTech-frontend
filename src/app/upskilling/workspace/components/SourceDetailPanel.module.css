@@ -1,0 +1,208 @@
+.panel {
+  background: #ffffff;
+  border: 1px solid #006aff86;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.137);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.panel::-webkit-scrollbar { width: 3px; }
+.panel::-webkit-scrollbar-track { background: transparent; }
+.panel::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 99px; }
+
+/* ── Top label ── */
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Source identity card ── */
+.sourceCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #d1e8ff44;
+  box-shadow: 0 0 5px #006aff23;
+  border: 1px solid #006aff5e;
+}
+
+.sourceIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: #acdffd70;
+  border: 1px solid #0044ff;
+  color: #007fd4;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.sourceMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.sourceName {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.sourceSubMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.fileType {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: #cbd5e1;
+}
+
+.statusPill {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: capitalize;
+}
+
+.status_ready      { background: #d1fae5; color: #059669; }
+.status_uploading,
+.status_processing { background: #e0e7ff; color: #6366f1; }
+.status_failed     { background: #fee2e2; color: #ef4444; }
+
+/* ── Generic section ── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectionTitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #000000;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e9eef5;
+}
+
+/* ── Meta rows (Overview) ── */
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.metaKey  { font-size: 0.8rem; color: #3d78ca; }
+.metaValue { font-size: 0.8rem; color: #0f172ac4; text-align: right; }
+
+/* ── Quick Actions ── */
+.actionList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: rgb(80, 80, 80);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.actionItem:hover {
+  background: #f4f6fb;
+  color: #00164b;
+}
+
+.actionIcon { color: #cbd5e1; flex-shrink: 0; transition: color 0.15s; }
+.actionItem:hover .actionIcon { color: #6366f1; }
+
+/* ── Tags ── */
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: #a5d2ff;
+  color: #000000;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ── Empty state ── */
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px;
+}
+
+.emptyIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #e9eef5;
+  display: grid;
+  place-items: center;
+  color: #cbd5e1;
+}
+
+.emptyText {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}

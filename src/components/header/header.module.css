@@ -3,10 +3,10 @@
   --clr-ink:        #0a0f1e;
   --clr-muted:      #64748b;
   --clr-accent:     #2150e8;
-  --clr-accent-dim: #dce6ff;
+  --clr-accent-dim: #F6F8FC;
   --clr-surface:    #ffffff;
   --clr-border:     rgba(15, 23, 42, 0.08);
-  --clr-hover-bg:   #f4f6fb;
+  --clr-hover-bg:   #dfe8ff;
   --radius-sm:      6px;
   --radius-md:      10px;
   --radius-lg:      14px;
@@ -26,12 +26,11 @@
   width: 100%;
   z-index: 1000;
   height: var(--header-height, 72px);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
   border-bottom: 1px solid var(--clr-border);
   box-shadow: var(--shadow-xs);
   transition: box-shadow 0.3s var(--ease-out);
+  background: rgba(255, 255, 255, 0.253);
+  backdrop-filter: blur(10px) saturate(160%);
 }
 
 .header::after {
@@ -149,6 +148,7 @@
               background-color 0.2s ease;
   white-space: nowrap;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.267);
 }
 
 .item:hover {
@@ -216,7 +216,6 @@
 }
 
 .exploreButton::after {
-  content: '⌄';
   font-size: 14px;
   line-height: 1;
   margin-top: 1px;
@@ -230,9 +229,9 @@
 
 .exploreButton:hover,
 .exploreButtonOpen {
-  background: var(--clr-hover-bg);
+  
   border-color: rgba(33, 80, 232, 0.2);
-  box-shadow: 0 0 0 3px rgba(33, 80, 232, 0.07);
+  box-shadow: 0 0 5px rgba(33, 79, 232, 0.411);
 }
 
 .exploreDropdown {
@@ -627,11 +626,12 @@
     padding: 0;
     margin-top: 0;
 
-    background: transparent;
+    background-color: rgba(162, 212, 241, 0.075);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.199);
 
-    transition: opacity 0.2s ease,
-                max-height 0.25s var(--ease-out),
-                visibility 0.2s;
+    transition: opacity 0.7s ease-in-out,
+                max-height 0.8s var(--ease-out),
+                visibility 0.5s;
   }
 
   .exploreDropdown.dropdownVisible {

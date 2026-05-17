@@ -1,6 +1,5 @@
 .panel {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #ffffff;
   border-radius: 14px;
   padding: 10px;
   display: flex;
@@ -9,8 +8,6 @@
   height: 100%;
   min-height: 0;
   overflow: hidden;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
 }
 
 .panelHeader {
@@ -26,15 +23,15 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
+  color: #26486e;
 }
 
 .closeButton {
   width: 30px;
   height: 30px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.4);
+  border: 1px solid #0471ffb2;
+  background: #ffffff;
+  color: #94a3b8;
   border-radius: 8px;
   display: grid;
   place-items: center;
@@ -43,8 +40,9 @@
 }
 
 .closeButton:hover {
-  background: rgba(255,255,255,0.09);
-  color: rgba(255,255,255,0.8);
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #cbd5e1;
 }
 
 .addButton {
@@ -52,9 +50,9 @@
   width: 100%;
   height: 42px;
   border-radius: 10px;
-  border: 1px dashed rgba(99,102,241,0.35);
-  background: rgba(99,102,241,0.07);
-  color: #a5b4fc;
+  border: 1.8px dashed #0073ff4d;
+  background: transparent;
+  color: #575757;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -62,13 +60,14 @@
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
+  font-family: inherit;
   transition: all 0.16s ease;
 }
 
 .addButton:hover {
-  background: rgba(99,102,241,0.14);
-  border-color: rgba(99,102,241,0.6);
-  color: #c7d2fe;
+  border-color: #6366f1;
+  color: #6366f1;
+  background: #eef2ff;
 }
 
 /* ── Source list ── */
@@ -84,28 +83,28 @@
 
 .sourceList::-webkit-scrollbar { width: 3px; }
 .sourceList::-webkit-scrollbar-track { background: transparent; }
-.sourceList::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+.sourceList::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 99px; }
 
 .sourceCard {
   width: 100%;
   padding: 11px 12px;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid #c9daf1;
   border-radius: 12px;
-  background: rgba(255,255,255,0.03);
+  background: white;
   cursor: pointer;
   text-align: left;
   transition: all 0.16s ease;
 }
 
 .sourceCard:hover {
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.12);
+  background: #d6eaff;
+  border-color: #0073ff;
 }
 
 .sourceCardActive {
-  border-color: rgba(99,102,241,0.45);
-  background: rgba(99,102,241,0.1);
-  box-shadow: 0 0 0 1px rgba(99,102,241,0.15);
+  border-color: rgba(99,102,241,0.4);
+  background: #eef2ff;
+  box-shadow: 0 0 0 1px rgba(99,102,241,0.1);
 }
 
 .sourceTopRow {
@@ -118,18 +117,18 @@
   width: 34px;
   height: 34px;
   border-radius: 9px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.5);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #94a3b8;
   display: grid;
   place-items: center;
   flex-shrink: 0;
 }
 
 .sourceCardActive .sourceIconWrap {
-  background: rgba(99,102,241,0.2);
-  border-color: rgba(99,102,241,0.4);
-  color: #a5b4fc;
+  background: #eef2ff;
+  border-color: rgba(99,102,241,0.3);
+  color: #6366f1;
 }
 
 .sourceMeta {
@@ -138,7 +137,7 @@
 }
 
 .sourceName {
-  color: rgba(255,255,255,0.85);
+  color: #0f172a;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.4;
@@ -151,7 +150,7 @@
   align-items: center;
   gap: 6px;
   flex-wrap: wrap;
-  color: rgba(255,255,255,0.3);
+  color: #94a3b8;
   font-size: 0.75rem;
 }
 
@@ -159,7 +158,7 @@
   width: 3px;
   height: 3px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.2);
+  background: #cbd5e1;
 }
 
 .statusPill {
@@ -176,27 +175,27 @@
 
 .status_uploading,
 .status_processing {
-  background: rgba(99,102,241,0.2);
-  color: #a5b4fc;
+  background: #e0e7ff;
+  color: #6366f1;
 }
 
 .status_ready {
-  background: rgba(16,185,129,0.2);
-  color: #6ee7b7;
+  background: #d1fae5;
+  color: #059669;
 }
 
 .status_failed {
-  background: rgba(239,68,68,0.2);
-  color: #fca5a5;
+  background: #fee2e2;
+  color: #ef4444;
 }
 
 .removeButton {
   width: 28px;
   height: 28px;
   border-radius: 7px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid #e2e8f0;
   background: transparent;
-  color: rgba(255,255,255,0.25);
+  color: #cbd5e1;
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -210,9 +209,9 @@
 }
 
 .removeButton:hover {
-  background: rgba(239,68,68,0.15);
-  border-color: rgba(239,68,68,0.3);
-  color: #fca5a5;
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #ef4444;
 }
 
 .progressTrack {
@@ -220,7 +219,7 @@
   height: 3px;
   margin-top: 10px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.08);
+  background: #e9eef5;
   overflow: hidden;
 }
 
@@ -243,16 +242,16 @@
   overflow: hidden;
 }
 
-.summary { color: rgba(255,255,255,0.45); }
-.summaryMuted { color: rgba(255,255,255,0.22); }
-.errorText { color: #fca5a5; }
+.summary { color: #64748b; }
+.summaryMuted { color: #94a3b8; }
+.errorText { color: #ef4444; }
 
 /* ── Search card ── */
 .searchCard {
   flex-shrink: 0;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid #e9eef5;
   border-radius: 12px;
-  background: rgba(255,255,255,0.03);
+  background: #f8fafc;
   padding: 10px 12px;
 }
 
@@ -261,11 +260,11 @@
   align-items: center;
   gap: 8px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid #e9eef5;
   margin-bottom: 10px;
 }
 
-.inputIcon { color: rgba(255,255,255,0.3); flex-shrink: 0; }
+.inputIcon { color: #cbd5e1; flex-shrink: 0; }
 
 .input {
   flex: 1;
@@ -273,11 +272,12 @@
   outline: 0;
   font-size: 0.875rem;
   background: transparent;
-  color: rgba(255,255,255,0.8);
+  color: #0f172a;
   min-width: 0;
+  font-family: inherit;
 }
 
-.input::placeholder { color: rgba(255,255,255,0.25); }
+.input::placeholder { color: #cbd5e1; }
 
 .searchFooter {
   display: flex;
@@ -292,20 +292,22 @@
   height: 30px;
   padding: 0 10px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.5);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
   display: inline-flex;
   align-items: center;
   gap: 5px;
   cursor: pointer;
   font-size: 0.78rem;
+  font-family: inherit;
   transition: all 0.15s;
 }
 
 .chip:hover {
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.8);
+  background: #f4f6fb;
+  border-color: #cbd5e1;
+  color: #0f172a;
 }
 
 .arrowButton {
@@ -313,8 +315,8 @@
   height: 32px;
   border: 0;
   border-radius: 9px;
-  background: rgba(99,102,241,0.25);
-  color: #a5b4fc;
+  background: #6366f1;
+  color: #ffffff;
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -323,8 +325,7 @@
 }
 
 .arrowButton:hover {
-  background: rgba(99,102,241,0.4);
-  color: #c7d2fe;
+  background: #4f46e5;
 }
 
 /* ── Empty ── */
@@ -345,21 +346,21 @@
   border-radius: 14px;
   display: grid;
   place-items: center;
-  color: rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  color: #cbd5e1;
+  background: #f8fafc;
+  border: 1px solid #e9eef5;
 }
 
 .emptyTitle {
   margin: 0;
-  color: rgba(255,255,255,0.5);
+  color: #64748b;
   font-size: 0.9rem;
   font-weight: 500;
 }
 
 .emptyText {
   margin: 0;
-  color: rgba(255,255,255,0.25);
+  color: #94a3b8;
   line-height: 1.6;
   font-size: 0.82rem;
   max-width: 220px;
