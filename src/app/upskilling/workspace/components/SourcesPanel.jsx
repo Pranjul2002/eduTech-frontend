@@ -60,13 +60,15 @@ export default function SourcesPanel({ onUploadClick, onClose }) {
       ) : (
         <div className={styles.sourceList}>
           {sources.map((source) => (
-            <button
+            <div
               key={source.localId}
-              type="button"
+              role="button"
+              tabIndex={0}
               className={`${styles.sourceCard} ${
                 activeSourceId === source.localId ? styles.sourceCardActive : ""
               }`}
               onClick={() => setActiveSourceId(source.localId)}
+              onKeyDown={(e) => e.key === "Enter" && setActiveSourceId(source.localId)}
             >
               <div className={styles.sourceTopRow}>
                 <div className={styles.sourceIconWrap}>
@@ -115,7 +117,7 @@ export default function SourcesPanel({ onUploadClick, onClose }) {
                     : "Waiting for summary from backend."}
                 </p>
               )}
-            </button>
+            </div>
           ))}
         </div>
       )}

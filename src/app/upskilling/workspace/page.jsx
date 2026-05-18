@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { PanelLeftOpen } from "lucide-react";
 import WorkspaceHeader from "./components/WorkspaceHeader";
 import SourcesPanel from "./components/SourcesPanel";
 import StudioPanel from "./components/StudioPanel";
 import MainPanel from "./components/MainPanel";
 import SourceDetailPanel from "./components/SourceDetailPanel";
+import MobileNav from "./components/MobileNav/MobileNav";
 import styles from "./workspace.module.css";
 import { useFiles } from "../context/FileContext";
 import { useAuth } from "@/context/AuthContext";
@@ -17,10 +18,10 @@ export default function UpskillingWorkspacePage() {
   const router = useRouter();
   const fileInputRef = useRef(null);
   const [activePanel, setActivePanel] = useState("sources");
+  const [mobileTab, setMobileTab] = useState("chat");
   const { sources, addFiles } = useFiles();
   const { isAuthenticated, authLoading } = useAuth();
 
-  // Redirect unauthenticated users to login
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
       router.replace("/auth?redirect=/upskilling/workspace");
@@ -44,6 +45,7 @@ export default function UpskillingWorkspacePage() {
     if (selectedFiles.length === 0) return;
     addFiles(selectedFiles);
     event.target.value = "";
+    setMobileTab("chat");
   };
 
   const layoutClassName = [styles.layout, !activePanel ? styles.panelClosed : ""]
@@ -53,15 +55,15 @@ export default function UpskillingWorkspacePage() {
 
   return (
     <main className={styles.page} data-page="upskilling-workspace">
-      <WorkspaceHeader />
+      <WorkspaceHeader onMenuClick={() => setActivePanel(activePanel ? null : "sources")} />
 
+      {/* ── Desktop 3-column layout ── */}
       <motion.section
         className={layoutClassName}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
-        {/* ── Left panel: Sources / Studio ── */}
         {activePanel ? (
           <motion.aside
             className={styles.mergedPanel}
@@ -85,7 +87,6 @@ export default function UpskillingWorkspacePage() {
                 Studio
               </button>
             </div>
-
             <div className={styles.panelBody}>
               {activePanel === "sources" && (
                 <SourcesPanel onUploadClick={openFilePicker} onClose={() => setActivePanel(null)} />
@@ -107,7 +108,6 @@ export default function UpskillingWorkspacePage() {
           </button>
         )}
 
-        {/* ── Middle column: AI Chat / Assessment ── */}
         <motion.div
           style={{ minHeight: 0, height: "100%", display: "flex", flexDirection: "column" }}
           initial={{ opacity: 0, x: 6 }}
@@ -117,7 +117,6 @@ export default function UpskillingWorkspacePage() {
           <MainPanel onUploadClick={openFilePicker} />
         </motion.div>
 
-        {/* ── Right column: About this source ── */}
         <motion.aside
           style={{ height: "100%", minHeight: 0 }}
           initial={{ opacity: 0, x: 6 }}
@@ -127,6 +126,67 @@ export default function UpskillingWorkspacePage() {
           <SourceDetailPanel />
         </motion.aside>
       </motion.section>
+
+      {/* ── Mobile single-panel view ── */}
+      <div className={styles.mobileView}>
+        <AnimatePresence mode="wait">
+          {mobileTab === "chat" && (
+            <motion.div
+              key="chat"
+              className={styles.mobilePanelWrap}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+            >
+              <MainPanel onUploadClick={openFilePicker} />
+            </motion.div>
+          )}
+          {mobileTab === "sources" && (
+            <motion.div
+              key="sources"
+              className={styles.mobilePanelWrap}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+            >
+              <SourcesPanel onUploadClick={openFilePicker} onClose={() => setMobileTab("chat")} />
+            </motion.div>
+          )}
+          {mobileTab === "studio" && (
+            <motion.div
+              key="studio"
+              className={styles.mobilePanelWrap}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+            >
+              <StudioPanel onClose={() => setMobileTab("chat")} />
+            </motion.div>
+          )}
+          {mobileTab === "settings" && (
+            <motion.div
+              key="settings"
+              className={styles.mobilePanelWrap}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+            >
+              <SourceDetailPanel />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* ── Mobile bottom nav ── */}
+      <MobileNav
+        activeTab={mobileTab}
+        onTabChange={setMobileTab}
+        onAddClick={openFilePicker}
+      />
 
       <input ref={fileInputRef} type="file" hidden multiple onChange={handleFileChange} />
     </main>

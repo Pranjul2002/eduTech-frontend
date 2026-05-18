@@ -1,16 +1,16 @@
+/* ── Page shell ── */
 .page {
   position: relative;
   height: 100vh;
   overflow: hidden;
   background: #f4f6fb;
-  /* 82px clears the fixed global header (--header-height), 16px on other sides */
   padding: 82px 16px 16px;
   display: flex;
   gap: 8px;
   flex-direction: column;
 }
 
-/* ── Layout ── */
+/* ── Desktop layout ── */
 .layout {
   position: relative;
   z-index: 1;
@@ -83,7 +83,7 @@
   flex-direction: column;
 }
 
-/* ── Side rail (collapsed state) ── */
+/* ── Side rail (collapsed) ── */
 .sideRail {
   border: 1px solid #e9eef5;
   background: #ffffff;
@@ -112,31 +112,54 @@
   font-size: 0.82rem;
 }
 
-/* ── Responsive ── */
-@media (max-width: 1280px) {
-  .layout,
-  .panelClosed {
-    grid-template-columns: 1fr;
-    height: auto;
-    overflow-y: auto;
+/* ── Mobile view — hidden on desktop ── */
+.mobileView {
+  display: none;
+}
+
+
+/* ── RESPONSIVE ── */
+
+/* Hide desktop layout, show mobile view */
+@media (max-width: 768px) {
+  .page {
+    padding: 0;
+    padding-top: 60px; /* workspace header height */
+    padding-bottom: 64px; /* bottom nav height */
+    background: #f4f6fb;
+    overflow: hidden;
   }
 
-  .sideRail {
-    height: 56px;
-    flex-direction: row;
+  .layout {
+    display: none;
   }
 
-  .sideRail span {
-    writing-mode: initial;
-    transform: none;
+  .mobileView {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
   }
 
-  .mergedPanel {
-    height: auto;
+  .mobilePanelWrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
   }
 }
 
-@media (max-width: 640px) {
-  .page { padding: 72px 8px 8px; }
-  .layout { gap: 8px; }
+/* Wide tablet — 2-column */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .layout,
+  .panelClosed {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .layout > aside:last-child {
+    display: none;
+  }
 }

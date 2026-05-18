@@ -1,4 +1,3 @@
-/* ── Outer wrapper fills the middle grid column fully ── */
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -11,7 +10,7 @@
   padding: 10px;
 }
 
-/* ── Tab strip ─────────────────────────────────────── */
+/* ── Tab strip ── */
 .tabStrip {
   flex-shrink: 0;
   display: flex;
@@ -56,7 +55,6 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.205);
 }
 
-/* Underline indicator */
 .tabIndicator {
   position: absolute;
   bottom: 0;
@@ -67,7 +65,7 @@
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
 }
 
-/* ── Body ──────────────────────────────────────────── */
+/* ── Body ── */
 .body {
   flex: 1;
   min-height: 0;
@@ -80,20 +78,68 @@
   flex-direction: column;
 }
 
-/* Hide but keep mounted (preserves chat history) */
 .hidden {
   display: none;
 }
 
-/* ── Responsive ────────────────────────────────────── */
-@media (max-width: 640px) {
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .wrapper {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    gap: 0;
+    background: transparent;
+  }
+
   .tabStrip {
-    border-radius: 10px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1.5px solid #eef0f6;
+    background: #ffffff;
+    padding: 0 16px;
+    gap: 0;
+    height: 48px;
   }
 
   .tab {
-    font-size: 0.82rem;
-    height: 34px;
-    gap: 5px;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    gap: 7px;
+    color: #94a3b8;
+    padding: 0 4px;
+    position: relative;
+  }
+
+  .tab:hover {
+    background: transparent;
+    color: #475569;
+  }
+
+  .tabActive {
+    background: transparent;
+    color: #5b5ef4;
+    border: none;
+    box-shadow: none;
+    font-weight: 600;
+  }
+
+  .tabIndicator {
+    left: 8%;
+    right: 8%;
+    height: 2.5px;
+    border-radius: 2px 2px 0 0;
+    background: #5b5ef4;
+    bottom: 0;
+  }
+
+  .body {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
   }
 }
