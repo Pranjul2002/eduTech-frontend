@@ -21,6 +21,11 @@ export const API_ENDPOINTS = {
     CHAPTER:  (bookSlug, chapterId) => `/api/catalog/chapters/${bookSlug}/${chapterId}`,
   },
 
+  // ── Questions (JWT required — mentor only) ────────────────────────────────
+  QUESTIONS: {
+    CREATE: "/api/questions/create",
+  },
+
   // ── Tests (JWT required) ──────────────────────────────────────────────────
   TESTS: {
     LIST:        "/api/tests",

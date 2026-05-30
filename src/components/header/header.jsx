@@ -193,14 +193,14 @@ const Header = () => {
                   >
                     Dashboard
                   </button>
-
-                  <button
-                    type="button"
-                    className={styles.dropdownItem}
-                    onClick={handleDashboardClick}
-                  >
-                    Profile
-                  </button>
+                  <Link href="/profile" style={{textDecoration: "none"}}>
+                    <button
+                      type="button"
+                      className={styles.dropdownItem}
+                    >
+                      Profile
+                    </button>
+                  </Link>
 
                   <div className={styles.dropdownDivider} />
 

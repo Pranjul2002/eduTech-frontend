@@ -4,10 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 
 export const NAV_ITEMS = [
   { id: "overview",  label: "Overview",  icon: "overview"  },
-  { id: "profile",   label: "Profile",   icon: "profile"   },
   { id: "mytest",    label: "My Tests",  icon: "mytest"    },
-  { id: "mybooks",   label: "My Books",  icon: "mybooks"   },  // ← NEW
-  { id: "settings",  label: "Settings",  icon: "settings"  },
+  { id: "mybooks",   label: "My Books",  icon: "mybooks"   },
 ];
 
 const TAB_KEY     = "dashboard-active-tab";

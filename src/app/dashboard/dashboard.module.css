@@ -70,6 +70,15 @@
   overflow-y: auto;
 }
 
+/* Bottom section for Profile & Settings links */
+.sidebarBottom {
+  padding: 10px 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
 .navItem {
   width: 100%;
   border: none;
@@ -225,6 +234,26 @@
 /* Content */
 .content {
   padding: 24px 28px 32px;
+}
+
+/* Back button */
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  color: #7c8594;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+  transition: color 0.16s ease;
+}
+
+.backBtn:hover {
+  color: #0f1117;
 }
 
 /* Tablet */
