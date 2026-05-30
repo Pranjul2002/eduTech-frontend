@@ -437,6 +437,112 @@
   flex: 1;
 }
 
+/* ── Step dots (question navigator) ─────────────────────────────────────── */
+.stepDots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 1.25rem 0.75rem;
+  flex-wrap: wrap;
+}
+
+.stepDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(167,139,250,0.3);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.stepDot:hover {
+  border-color: #a78bfa;
+  background: rgba(167,139,250,0.2);
+}
+
+.stepDotActive {
+  border-color: #a78bfa !important;
+  background: #a78bfa !important;
+  transform: scale(1.25);
+}
+
+.stepDotDone {
+  border-color: #86efac;
+  background: rgba(134,239,172,0.4);
+}
+
+/* ── Navigation row (Prev / Next / Submit) ───────────────────────────────── */
+.navRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem 0;
+}
+
+.navBtns {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-secondary, rgba(255,255,255,0.12));
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.navBtn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.05);
+  color: var(--color-text-primary);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.navBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.navBtnNext {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.navBtnNext:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.navBtnNext:active {
+  transform: translateY(0);
+}
+
 /* ── Results ─────────────────────────────────────────────────────────────── */
 .results {
   display: flex;

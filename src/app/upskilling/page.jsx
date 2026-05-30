@@ -117,11 +117,20 @@ export default function UpskillingPage() {
     }
   };
 
+  // Called when user picks a sample PDF — treat it just like a real upload
+  const handleSampleSelect = (file) => {
+    addFiles([file]);
+    router.push("/upskilling/workspace");
+  };
+
   if (showNotebookEntry) {
     return (
       <main className={styles.page}>
         <div className={styles.backgroundGlow} />
-        <LandingCard onUploadClick={handleOpenFilePicker} />
+        <LandingCard
+          onUploadClick={handleOpenFilePicker}
+          onSampleClick={handleSampleSelect}
+        />
         <input ref={fileInputRef} type="file" hidden multiple onChange={handleFileChange} />
       </main>
     );

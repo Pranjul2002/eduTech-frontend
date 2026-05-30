@@ -182,6 +182,7 @@ export default function AssessmentPanel() {
   const [error, setError] = useState("");
   const [count, setCount] = useState(5);
   const [topic, setTopic] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const isReady = activeSource?.status === "ready";
 
@@ -198,6 +199,7 @@ export default function AssessmentPanel() {
       });
       setQuestions(data.questions || []);
       setAnswers({});
+      setCurrentIndex(0);
       setStep("answering");
     } catch (err) {
       setError(err.message);
@@ -263,6 +265,7 @@ export default function AssessmentPanel() {
     setAnswers({});
     setResults(null);
     setError("");
+    setCurrentIndex(0);
   };
 
   // ── Answered count ──────────────────────────────────────────────────────────
@@ -365,47 +368,104 @@ export default function AssessmentPanel() {
       )}
 
       {/* ══ STEP: answering ═══════════════════════════════════ */}
-      {step === "answering" && (
-        <div className={styles.answering}>
-          <div className={styles.progressRow}>
-            <span className={styles.progressLabel}>
-              {answeredCount} / {questions.length} answered
-            </span>
-            <div className={styles.progressTrack}>
-              <div
-                className={styles.progressFill}
-                style={{ width: `${Math.round((answeredCount / questions.length) * 100)}%` }}
-              />
+      {step === "answering" && (() => {
+        const q = questions[currentIndex];
+        const isFirst = currentIndex === 0;
+        const isLast  = currentIndex === questions.length - 1;
+        const currentAnswered = answers[q?.number];
+        const currentHasAnswer = currentAnswered &&
+          ((currentAnswered.type === "text" && currentAnswered.value?.trim()) ||
+           (currentAnswered.type === "file" && currentAnswered.value));
+
+        return (
+          <div className={styles.answering}>
+            {/* Progress bar */}
+            <div className={styles.progressRow}>
+              <span className={styles.progressLabel}>
+                {answeredCount} / {questions.length} answered
+              </span>
+              <div className={styles.progressTrack}>
+                <div
+                  className={styles.progressFill}
+                  style={{ width: `${Math.round((answeredCount / questions.length) * 100)}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Step indicator dots */}
+            <div className={styles.stepDots}>
+              {questions.map((_, i) => {
+                const ans = answers[questions[i]?.number];
+                const done = ans && ((ans.type === "text" && ans.value?.trim()) || (ans.type === "file" && ans.value));
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    className={`${styles.stepDot} ${i === currentIndex ? styles.stepDotActive : ""} ${done ? styles.stepDotDone : ""}`}
+                    onClick={() => setCurrentIndex(i)}
+                    title={`Question ${i + 1}`}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Single question */}
+            <div className={styles.questionList}>
+              {q && (
+                <div className={styles.questionBlock}>
+                  <div className={styles.questionHeader}>
+                    <span className={styles.questionNum}>Q{q.number}</span>
+                    <span className={styles.questionText}>{q.question}</span>
+                  </div>
+                  <AnswerInput key={q.number} question={q} onUpdate={updateAnswer} />
+                </div>
+              )}
+            </div>
+
+            {/* Navigation row */}
+            <div className={styles.navRow}>
+              <button
+                className={styles.ghostBtn}
+                onClick={reset}
+                type="button"
+              >
+                <RotateCcw size={14} /> Start over
+              </button>
+
+              <div className={styles.navBtns}>
+                <button
+                  className={styles.navBtn}
+                  type="button"
+                  disabled={isFirst}
+                  onClick={() => setCurrentIndex((i) => i - 1)}
+                >
+                  ← Previous
+                </button>
+
+                {isLast ? (
+                  <button
+                    className={styles.primaryBtn}
+                    onClick={evaluate}
+                    disabled={answeredCount === 0}
+                    type="button"
+                    style={{ width: "auto", padding: "9px 20px" }}
+                  >
+                    Submit & evaluate
+                  </button>
+                ) : (
+                  <button
+                    className={styles.navBtnNext}
+                    type="button"
+                    onClick={() => setCurrentIndex((i) => i + 1)}
+                  >
+                    Next →
+                  </button>
+                )}
+              </div>
             </div>
           </div>
-
-          <div className={styles.questionList}>
-            {questions.map((q, i) => (
-              <div key={q.number} className={styles.questionBlock}>
-                <div className={styles.questionHeader}>
-                  <span className={styles.questionNum}>Q{q.number}</span>
-                  <span className={styles.questionText}>{q.question}</span>
-                </div>
-                <AnswerInput question={q} onUpdate={updateAnswer} />
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.submitRow}>
-            <button className={styles.ghostBtn} onClick={reset} type="button">
-              <RotateCcw size={14} /> Start over
-            </button>
-            <button
-              className={styles.primaryBtn}
-              onClick={evaluate}
-              disabled={answeredCount === 0}
-              type="button"
-            >
-              Submit & evaluate
-            </button>
-          </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* ══ STEP: evaluating ══════════════════════════════════ */}
       {step === "evaluating" && (
